@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Linkedin, Mail, Github } from "lucide-react"
 
 const navigation = {
@@ -36,9 +37,13 @@ export function Footer() {
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-              SM
-            </div>
+            <Image 
+              src="/SD Logo.png" 
+              alt="SD Logo" 
+              width={40} 
+              height={40}
+              className="h-10 w-10 object-contain"
+            />
             <span className="font-bold text-lg text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
               Sein Muwana
             </span>

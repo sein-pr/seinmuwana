@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -7,7 +8,29 @@ import { ArrowRight, Download, MapPin } from "lucide-react"
 import { HeroImageSlider } from "./hero-image-slider"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
+const roles = [
+  "Software Engineer",
+  "Process Automation Specialist",
+  "Quality Assurance Engineer",
+  "AI Specialist"
+]
+
 export function HeroSection() {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true)
+      setTimeout(() => {
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length)
+        setIsAnimating(false)
+      }, 500)
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section className="relative overflow-hidden bg-background py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -28,7 +51,13 @@ export function HeroSection() {
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   Hi, I&apos;m a{" "}
-                  <span className="text-primary">Software Engineer</span>
+                  <span 
+                    className={`text-primary inline-block transition-all duration-500 ${
+                      isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+                    }`}
+                  >
+                    {roles[currentRoleIndex]}
+                  </span>
                 </h1>
                 <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
                   Dedicated software engineer with expertise in C#, Java, Python, full-stack web development,

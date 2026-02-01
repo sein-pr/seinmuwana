@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -22,9 +23,13 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-            SM
-          </div>
+          <Image 
+            src="/SD Logo.png" 
+            alt="SD Logo" 
+            width={40} 
+            height={40}
+            className="h-10 w-10 object-contain"
+          />
           <span className="hidden font-bold text-lg text-foreground sm:block" style={{ fontFamily: 'var(--font-heading)' }}>
             Sein Muwana
           </span>

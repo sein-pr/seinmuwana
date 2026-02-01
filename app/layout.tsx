@@ -16,21 +16,8 @@ export const metadata: Metadata = {
   keywords: ['Software Engineer', 'AI', 'Automation', 'Full-Stack Developer', 'Namibia', 'AgriTech'],
   authors: [{ name: 'Sein Muwana' }],
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/SD Logo.png',
+    apple: '/SD Logo.png',
   },
 }
 
