@@ -61,7 +61,7 @@ export function HeroImageSlider() {
       onMouseMove={handleMouseMove}
     >
       {/* Images */}
-      <div className="aspect-[4/5] relative w-full max-w-[320px]">
+      <div className="aspect-[4/5] relative w-full max-w-[380px]">
         {images.map((image, index) => (
           <div
             key={image.src}

@@ -1,4 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
+import React from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { 
@@ -7,17 +10,14 @@ import {
   Phone, 
   MapPin, 
   Linkedin, 
+  Globe,
   Briefcase, 
   GraduationCap,
   Code2,
   Award,
   Languages
 } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "CV | Sein Muwana",
-  description: "Download Sein Muwana's curriculum vitae - Software Engineer with expertise in AI, automation, and full-stack development.",
-}
+import { downloadCVFromBack4App } from "@/lib/pdf-generator"
 
 const experience = [
   {
@@ -106,9 +106,23 @@ const references = [
 ]
 
 export default function CVPage() {
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const handleDownloadPDF = async () => {
+    setIsGenerating(true)
+    try {
+      await downloadCVFromBack4App()
+    } catch (error) {
+      console.error('Error downloading PDF:', error)
+      alert('Failed to download CV. Please try again.')
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
   return (
     <div className="bg-background py-16 sm:py-24">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+      <div id="cv-content" className="mx-auto max-w-4xl px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col gap-6 border-b border-border pb-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
@@ -137,6 +151,17 @@ export default function CVPage() {
                 </a>
               </div>
               <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                <a 
+                  href="https://seinmuwana.netlify.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-primary"
+                >
+                  seinmuwana.netlify.app
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
                 <Linkedin className="h-4 w-4" />
                 <a 
                   href="https://www.linkedin.com/in/sein-muwana-2ab319299/" 
@@ -150,9 +175,14 @@ export default function CVPage() {
             </div>
           </div>
           
-          <Button size="lg" className="gap-2 shrink-0">
+          <Button 
+            size="lg" 
+            className="gap-2 shrink-0 cursor-pointer"
+            onClick={handleDownloadPDF}
+            disabled={isGenerating}
+          >
             <Download className="h-4 w-4" />
-            Download PDF
+            {isGenerating ? 'Generating...' : 'Download PDF'}
           </Button>
         </div>
 

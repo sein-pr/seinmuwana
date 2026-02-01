@@ -57,47 +57,47 @@ export function HeroSection() {
 
           {/* Right Content - Profile Card */}
           <AnimatedSection animation="fade-left" delay={300} className="flex flex-1 justify-center lg:justify-end">
-            <div className="relative">
+            <div className="relative w-full max-w-md">
               {/* Main Profile Card */}
               <div className="relative z-10 overflow-hidden rounded-2xl bg-card shadow-xl">
-                <div className="p-6">
+                <div className="p-8">
                   <div className="flex items-start gap-4">
                     <div className="space-y-1">
                       <h2
-                        className="text-xl font-bold text-card-foreground"
+                        className="text-2xl font-bold text-card-foreground"
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         Sein Muwana
                       </h2>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <MapPin className="h-4 w-4" />
+                      <div className="flex items-center gap-1 text-base text-muted-foreground">
+                        <MapPin className="h-5 w-5" />
                         Windhoek, Namibia
                       </div>
                     </div>
                   </div>
 
                   {/* Profile Image with Slider */}
-                  <div className="mt-4">
+                  <div className="mt-6">
                     <HeroImageSlider />
                   </div>
 
                   {/* Tags */}
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge variant="secondary">AI Expert</Badge>
-                    <Badge variant="secondary">Full-Stack</Badge>
-                    <Badge variant="secondary">Automation</Badge>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge variant="secondary" className="text-sm px-3 py-1">AI Expert</Badge>
+                    <Badge variant="secondary" className="text-sm px-3 py-1">Full-Stack</Badge>
+                    <Badge variant="secondary" className="text-sm px-3 py-1">Automation</Badge>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Badge - Moved down */}
-              <div className="absolute -bottom-6 -left-4 z-20 rounded-xl bg-primary px-4 py-3 shadow-lg">
-                <p className="text-sm font-medium text-primary-foreground">CS Honours Graduate</p>
-                <p className="text-xs text-primary-foreground/80">University of Namibia</p>
+              {/* Floating Badge - Top Right Corner */}
+              <div className="absolute -top-3 -right-4 z-20 rounded-xl bg-primary px-5 py-4 shadow-lg">
+                <p className="text-base font-medium text-primary-foreground">CS Honours Graduate</p>
+                <p className="text-sm text-primary-foreground/80">University of Namibia</p>
               </div>
 
               {/* Decorative Element */}
-              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />
+              <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-accent/20 blur-2xl" />
             </div>
           </AnimatedSection>
         </div>
