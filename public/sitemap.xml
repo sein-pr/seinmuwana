@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://seinmuwana.netlify.app/certifications</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://seinmuwana.netlify.app/blog/getting-started-with-rpa</loc>
     <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -134,6 +140,48 @@
   </url>
   <url>
     <loc>https://seinmuwana.netlify.app/projects/isak-shawapala</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/basics-of-data-science</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/neo4j-fundamentals</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/graph-data-science-neo4j</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/python-cisco</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/agrisense-environmental-sustainability</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/critical-thinking-ai-era</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://seinmuwana.netlify.app/certifications/hackeratom-participation</loc>
     <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
