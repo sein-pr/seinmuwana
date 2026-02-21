@@ -24,7 +24,7 @@ const navigation = {
     },
     {
       name: "GitHub",
-      href: "https://github.com/seinmuwana",
+      href: "https://github.com/sein-pr",
       icon: Github,
     },
   ],

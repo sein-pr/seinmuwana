@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { OtherProjectsSection } from "@/components/projects/other-projects-section"
 import { 
   ArrowRight, 
   Leaf, 
   Bot, 
   Globe, 
   Database, 
-  ExternalLink,
   Github,
   CheckCircle2
 } from "lucide-react"
@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 const projects = [
   {
     slug: "agrisense",
+    iconKey: "leaf",
     icon: Leaf,
     title: "AgriSense",
     subtitle: "Honours Research Project",
@@ -37,10 +38,11 @@ const projects = [
     ],
     impact: "Aimed at improving food security and agricultural productivity in Namibia by providing farmers with accessible technology solutions.",
     liveUrl: null,
-    githubUrl: "https://github.com/seinmuwana",
+    githubUrl: "https://github.com/sein-pr",
   },
   {
     slug: "rpa-automation-suite",
+    iconKey: "bot",
     icon: Bot,
     title: "RPA Automation Suite",
     subtitle: "Agribank Project",
@@ -58,9 +60,11 @@ const projects = [
     impact: "Significantly reduced manual workload and improved process efficiency across multiple departments.",
     liveUrl: null,
     githubUrl: null,
+    category: "Automation",
   },
   {
     slug: "user-access-management",
+    iconKey: "globe",
     icon: Globe,
     title: "User Access Management System",
     subtitle: "Agribank Project",
@@ -78,9 +82,11 @@ const projects = [
     impact: "Transformed manual data workflows into efficient digital processes, improving operational speed and accuracy.",
     liveUrl: null,
     githubUrl: null,
+    category: "Web App",
   },
   {
     slug: "website-revamp",
+    iconKey: "database",
     icon: Database,
     title: "Website Revamp Project",
     subtitle: "Agribank Project - Project Manager",
@@ -98,6 +104,79 @@ const projects = [
     impact: "Successfully delivered a modernized website that better serves the bank's customers and stakeholders.",
     liveUrl: "https://www.agribank.com.na",
     githubUrl: null,
+    category: "Website",
+  },
+  {
+    slug: "ferreiras-garden-centre",
+    iconKey: "globe",
+    icon: Globe,
+    title: "Ferreiras Garden Centre Website",
+    subtitle: "Business Website",
+    description: "A clean, product-focused website for Ferreiras Garden Centre that highlights gardening products, contact info, and in-store offerings.",
+    longDescription:
+      "Built and deployed a responsive website for Ferreiras Garden Centre to strengthen their online presence and make it easier for customers to discover products and reach the business.",
+    status: "Completed",
+    featured: false,
+    tags: ["Next.js", "React", "Tailwind CSS", "Netlify"],
+    objectives: [],
+    impact: "Improved digital visibility and gave customers a faster way to explore the garden centre online.",
+    liveUrl: "https://ferreirasgardencentre.netlify.app/",
+    githubUrl: null,
+    category: "Website",
+  },
+  {
+    slug: "js-hardware",
+    iconKey: "database",
+    icon: Database,
+    title: "JS Hardware Website",
+    subtitle: "Retail / Hardware Website",
+    description: "A business web presence for JS Hardware focused on product discoverability, services, and clear customer communication.",
+    longDescription:
+      "Developed a modern hardware business website with intuitive structure and mobile-friendly layouts to showcase offerings and support customer inquiries.",
+    status: "Completed",
+    featured: false,
+    tags: ["Next.js", "React", "Tailwind CSS", "Netlify"],
+    objectives: [],
+    impact: "Created a stronger online storefront and clearer information flow for customers.",
+    liveUrl: "https://jshardware.netlify.app/",
+    githubUrl: null,
+    category: "E-Commerce",
+  },
+  {
+    slug: "gold-ideas",
+    iconKey: "bot",
+    icon: Bot,
+    title: "Gold Ideas Platform",
+    subtitle: "Innovation / Idea Showcase",
+    description: "A web platform designed to present ideas and concepts in a polished, engaging format for users and stakeholders.",
+    longDescription:
+      "Created an ideas-focused website experience that emphasizes clarity, presentation, and easy navigation for showcasing concept-driven content.",
+    status: "Completed",
+    featured: false,
+    tags: ["Next.js", "React", "Tailwind CSS", "Netlify"],
+    objectives: [],
+    impact: "Provided a professional web channel for presenting and communicating innovation-focused content.",
+    liveUrl: "https://gold-ideas.netlify.app/",
+    githubUrl: null,
+    category: "Business",
+  },
+  {
+    slug: "isak-shawapala",
+    iconKey: "globe",
+    icon: Globe,
+    title: "Isak Shawapala Portfolio",
+    subtitle: "Personal Portfolio Website",
+    description: "A personal portfolio website crafted to present profile information, achievements, and professional visibility online.",
+    longDescription:
+      "Designed and deployed a portfolio site with a clean structure and responsive layout to help establish a strong personal brand online.",
+    status: "Completed",
+    featured: false,
+    tags: ["Next.js", "React", "Tailwind CSS", "Netlify"],
+    objectives: [],
+    impact: "Enabled a clear professional online profile and improved discoverability for opportunities.",
+    liveUrl: "https://isakshawapala.netlify.app/",
+    githubUrl: null,
+    category: "Portfolio",
   },
 ]
 
@@ -216,80 +295,21 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Other Projects */}
-      <section className="bg-card py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 
-            className="text-2xl font-bold text-foreground mb-8"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            Other Projects
-          </h2>
-          
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.filter(p => !p.featured).map((project) => (
-              <Link 
-                key={project.title}
-                href={`/projects/${project.slug}`}
-                className="group"
-              >
-                <div className="h-full rounded-2xl border border-border bg-background p-6 transition-all hover:border-primary/50 hover:shadow-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <project.icon className="h-6 w-6" />
-                    </div>
-                    <Badge variant={project.status === "Completed" ? "secondary" : "default"}>
-                      {project.status}
-                    </Badge>
-                  </div>
-                  
-                  <h3 
-                    className="text-lg font-bold text-foreground group-hover:text-primary transition-colors"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-primary font-medium">{project.subtitle}</p>
-                  
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span 
-                        key={tag}
-                        className="inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="text-xs text-muted-foreground">
-                        +{project.tags.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Link indicators */}
-                  <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-                    <span className="text-sm font-medium text-primary group-hover:underline flex items-center gap-1">
-                      View project
-                      <ArrowRight className="h-3 w-3" />
-                    </span>
-                    {project.liveUrl && (
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <ExternalLink className="h-3 w-3" />
-                        Live
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <OtherProjectsSection
+        projects={projects
+          .filter((project) => !project.featured)
+          .map((project) => ({
+            slug: project.slug,
+            title: project.title,
+            subtitle: project.subtitle,
+            description: project.description,
+            status: project.status,
+            tags: project.tags,
+            liveUrl: project.liveUrl,
+            iconKey: project.iconKey as "bot" | "globe" | "database",
+            category: project.category,
+          }))}
+      />
 
       {/* CTA Section */}
       <section className="py-16 sm:py-24">
