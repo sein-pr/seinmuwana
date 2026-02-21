@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Host: https://seinmuwana.netlify.app
+Sitemap: https://seinmuwana.netlify.app/sitemap.xml
