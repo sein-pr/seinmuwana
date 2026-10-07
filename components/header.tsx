@@ -26,6 +26,15 @@ export function Header() {
   const setMobileMenuOpen = (open: boolean) => setOpenedOn(open ? pathname : null)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // On the home page the bar floats transparent over the hero until you scroll.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   useEffect(() => {
     if (!mobileMenuOpen) return
@@ -42,7 +51,12 @@ export function Header() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
-    <header className="print:hidden sticky top-0 z-50 w-full border-b border-white/10 bg-carbon text-white">
+    <header
+      className={cn(
+        "print:hidden sticky top-0 z-50 w-full border-b text-white transition-colors duration-300",
+        pathname === "/" && !scrolled && !mobileMenuOpen ? "border-transparent bg-transparent" : "border-white/10 bg-carbon",
+      )}
+    >
       <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
         <Link href="/" className="flex min-h-11 items-center gap-2.5">
           <Image

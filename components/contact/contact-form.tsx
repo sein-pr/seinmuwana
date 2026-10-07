@@ -16,6 +16,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle")
   const [error, setError] = useState("")
   const [code, setCode] = useState("")
+  const [reason, setReason] = useState("")
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
 
   const update = (key: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -26,6 +27,7 @@ export function ContactForm() {
     setStatus("sending")
     setError("")
     setCode("")
+    setReason("")
     setFieldErrors({})
 
     try {
@@ -34,12 +36,13 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       })
-      const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string; fields?: FieldErrors }
+      const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string; reason?: string; fields?: FieldErrors }
 
       if (!res.ok) {
         setFieldErrors(data.fields ?? {})
         setError(data.error ?? "Your message couldn't be sent. Please try again.")
         setCode(data.code ?? "")
+        setReason(data.reason ?? "")
         setStatus("error")
         return
       }
@@ -95,6 +98,7 @@ export function ContactForm() {
         {status === "error" && (
           <p className="rounded-lg border border-destructive/40 bg-destructive/5 px-4 py-3 text-sm text-foreground">{error}
             {code && <span className="mt-1 block text-xs text-muted-foreground">Error code: {code}</span>}
+            {reason && <span className="mt-1 block text-xs text-muted-foreground">{reason}</span>}
           </p>
         )}
       </div>
