@@ -6,6 +6,8 @@ import { ArrowLeft } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { blogPosts, getPostBySlug, readTime } from "@/lib/blog"
+import { SplitHeading } from "@/components/motion/split-heading"
+import { Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const dynamicParams = false
 
@@ -44,7 +46,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <p className="mt-4 text-base text-white/60">
             {post.category} · <span className="tabular">{date}</span> · <span className="tabular">{readTime(post)} min read</span>
           </p>
-          <h1 className="mt-3 text-[2.25rem] leading-[1.08] text-white sm:text-5xl">{post.title}</h1>
+          <SplitHeading as="h1" text={post.title} delay={0.05} className="mt-3 text-[2.25rem] leading-[1.08] text-white sm:text-5xl" />
           <p className="mt-5 text-lg leading-[1.55] text-white/75">{post.excerpt}</p>
         </div>
       </header>
@@ -72,17 +74,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
       <Section tone="fog">
         <h2 className="text-2xl text-foreground">Keep reading</h2>
-        <ul className="mt-6 grid gap-8 md:grid-cols-2">
+        <Stagger className="mt-6 grid gap-8 md:grid-cols-2">
           {more.map((p) => (
-            <li key={p.slug}>
+            <StaggerItem key={p.slug}>
               <Link href={`/blog/${p.slug}`} className="group block">
                 <p className="text-sm text-muted-foreground">{p.category}</p>
                 <h3 className="mt-1 text-xl text-foreground group-hover:underline group-hover:underline-offset-4">{p.title}</h3>
                 <p className="mt-2 text-base leading-[1.55] text-graphite">{p.excerpt}</p>
               </Link>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </Section>
 
       <ClosingBand

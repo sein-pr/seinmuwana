@@ -9,6 +9,7 @@ import { SmoothScroll } from '@/components/motion/smooth-scroll'
 import { MotionProvider } from '@/components/motion/motion-provider'
 import { Cursor } from '@/components/motion/cursor'
 import { ScrollProgress } from '@/components/motion/scroll-progress'
+import { BackToTop } from '@/components/motion/back-to-top'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: "600", variable: "--font-plex" });
@@ -94,6 +95,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <BackToTop />
         </MotionProvider>
         <Analytics />
       </body>

@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProfileSlider } from "@/components/profile-slider"
 import { RevealMask } from "@/components/motion/reveal-mask"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
+import { ScrollTimeline, TimelineDot } from "@/components/motion/scroll-timeline"
 import { PageHeader } from "@/components/layout/page-header"
 import { Section, SectionHeading } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
@@ -27,6 +29,15 @@ const practice = [
     title: "Remove the manual step",
     body: "A data-access application improved efficiency by 80%, the RPA robots cut manual effort by 75%, and a dashboard replaced a week of report preparation.",
   },
+]
+
+const milestones = [
+  { when: "2021", what: "Started a BSc in Computer Science at the University of Namibia." },
+  { when: "Jan 2025", what: "Student registration assistant at UNAM, keeping records accurate during peak registration." },
+  { when: "Feb 2025", what: "Joined Agribank as a software development intern. Extended from three to six months, then again." },
+  { when: "Oct 2025", what: "Submitted my honours thesis, AgriSense, supervised by Dr. Nalina Suresh." },
+  { when: "Jan 2026", what: "Moved into the Data Analyst Graduate role at Agribank." },
+  { when: "Apr 2026", what: "Completed EPFL's Elements of Data Science, a verified certificate of attendance." },
 ]
 
 const interests = [
@@ -82,17 +93,32 @@ export default function AboutPage() {
 
       <Section tone="fog">
         <SectionHeading title="How I work" description="Habits I picked up delivering for a bank and a university." />
-        <div className="mt-12 grid gap-10 md:grid-cols-3">
+        <Stagger className="mt-12 grid gap-10 md:grid-cols-3" gap={0.12}>
           {practice.map((item) => (
-            <div key={item.title}>
+            <StaggerItem key={item.title} className="border-t border-foreground/20 pt-5">
               <h3 className="text-xl text-foreground">{item.title}</h3>
               <p className="mt-3 text-base leading-[1.55] text-graphite">{item.body}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       <Section>
+        <SectionHeading title="The path so far" description="From a registration desk to a finance dashboard." />
+        <ScrollTimeline className="mt-12" railClassName="left-[7.5rem]">
+          <ol>
+            {milestones.map((m) => (
+              <li key={m.when} className="relative grid gap-2 py-5 md:grid-cols-[7.5rem_1fr] md:gap-0">
+                <TimelineDot className="left-[7.5rem] top-[1.95rem]" />
+                <Reveal className="tabular text-sm text-muted-foreground md:pt-1">{m.when}</Reveal>
+                <Reveal className="max-w-2xl text-lg leading-[1.5] text-foreground md:pl-10">{m.what}</Reveal>
+              </li>
+            ))}
+          </ol>
+        </ScrollTimeline>
+      </Section>
+
+      <Section tone="fog">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
             <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Where I&apos;m heading</h2>

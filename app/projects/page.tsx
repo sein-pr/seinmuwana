@@ -4,9 +4,10 @@ import { ArrowUpRight } from "lucide-react"
 import { PageHeader } from "@/components/layout/page-header"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
-import { AnimatedSection } from "@/components/ui/animated-section"
 import { projects, type Project } from "@/lib/projects"
 import { DrawLine } from "@/components/motion/draw-line"
+import { Tilt } from "@/components/motion/tilt"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const metadata: Metadata = {
   title: "Projects | Sein Muwana",
@@ -26,7 +27,8 @@ export default function ProjectsPage() {
       />
 
       <Section>
-        <AnimatedSection animation="fade-up">
+        <Reveal>
+          <Tilt className="rounded-lg">
           <Link
             href={`/projects/${featured.slug}`}
             className="group grid gap-8 rounded-lg bg-lavender-mist p-8 transition-colors hover:bg-periwinkle-tint lg:grid-cols-[1.3fr_1fr] lg:p-12"
@@ -48,7 +50,8 @@ export default function ProjectsPage() {
               ))}
             </ul>
           </Link>
-        </AnimatedSection>
+          </Tilt>
+        </Reveal>
       </Section>
 
       {groups.map((group, i) => (
@@ -56,11 +59,11 @@ export default function ProjectsPage() {
           <h2 className="text-4xl text-foreground sm:text-[2.5rem]">
             {group === "Agribank" ? "Data and automation at Agribank" : "Websites"}
           </h2>
-          <ul className="mt-10 border-t border-border">
+          <Stagger className="mt-10 border-t border-border" gap={0.06}>
             {projects
               .filter((p) => p.group === group)
               .map((project) => (
-                <li key={project.slug} className="relative">
+                <StaggerItem key={project.slug} className="relative">
                   <DrawLine />
                   <Link
                     href={`/projects/${project.slug}`}
@@ -76,9 +79,9 @@ export default function ProjectsPage() {
                     <p className="text-base leading-[1.55] text-graphite">{project.summary}</p>
                     <p className="text-sm text-muted-foreground md:text-right">{project.tags.slice(0, 3).join(" · ")}</p>
                   </Link>
-                </li>
+                </StaggerItem>
               ))}
-          </ul>
+          </Stagger>
         </Section>
       ))}
 

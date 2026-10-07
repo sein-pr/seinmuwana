@@ -4,6 +4,8 @@ import { PageHeader } from "@/components/layout/page-header"
 import { Section } from "@/components/layout/section"
 import { ContactForm } from "@/components/contact/contact-form"
 import { CopyEmail } from "@/components/contact/copy-email"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
+import { VelocityMarquee } from "@/components/motion/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "Contact | Sein Muwana",
@@ -49,9 +51,9 @@ export default function ContactPage() {
         <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
           <div>
             <h2 className="text-2xl text-foreground">Contact details</h2>
-            <ul className="mt-6 divide-y divide-border border-y border-border">
+            <Stagger className="mt-6 divide-y divide-border border-y border-border" gap={0.09}>
               {channels.map((item) => (
-                <li key={item.label} className="flex items-center gap-4 py-4">
+                <StaggerItem key={item.label} className="flex items-center gap-4 py-4">
                   <item.icon className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
                   <div className="min-w-0">
                     <p className="text-sm text-muted-foreground">{item.label}</p>
@@ -69,30 +71,34 @@ export default function ContactPage() {
                     )}
                   </div>
                   {item.label === "Email" && <div className="ml-auto"><CopyEmail email={item.value} /></div>}
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
 
-          <div>
+          <Reveal delay={0.1}>
             <h2 className="text-2xl text-foreground">Send a message</h2>
             <div className="mt-6">
               <ContactForm />
             </div>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
+      <div className="border-y border-border bg-background py-5">
+        <VelocityMarquee items={["Say hello", "Send a brief", "Ask a question", "Start a project"]} speed={-2} itemClassName="text-3xl font-extrabold tracking-tight text-foreground sm:text-5xl" />
+      </div>
+
       <Section tone="fog">
         <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Common questions</h2>
-        <dl className="mt-10 grid gap-8 md:grid-cols-3">
+        <Stagger className="mt-10 grid gap-8 md:grid-cols-3" gap={0.1}>
           {faqs.map((item) => (
-            <div key={item.q}>
-              <dt className="text-lg font-semibold text-foreground">{item.q}</dt>
-              <dd className="mt-2 text-base leading-[1.55] text-graphite">{item.a}</dd>
-            </div>
+            <StaggerItem key={item.q} className="border-t border-foreground/20 pt-5">
+              <h3 className="text-lg font-semibold text-foreground">{item.q}</h3>
+              <p className="mt-2 text-base leading-[1.55] text-graphite">{item.a}</p>
+            </StaggerItem>
           ))}
-        </dl>
+        </Stagger>
       </Section>
     </>
   )
