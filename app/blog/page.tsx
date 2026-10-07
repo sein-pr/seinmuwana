@@ -5,7 +5,8 @@ import { PageHeader } from "@/components/layout/page-header"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { blogCategories, blogPosts, readTime } from "@/lib/blog"
-import { cn } from "@/lib/utils"
+import { CategoryNav } from "@/components/blog/category-nav"
+import { Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const metadata: Metadata = {
   title: "Blog | Sein Muwana",
@@ -30,39 +31,19 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
       />
 
       <Section>
-        <nav aria-label="Filter posts by category" className="flex flex-wrap gap-2">
-          {blogCategories.map((name) => {
-            const selected = name === active
-            return (
-              <Link
-                key={name}
-                href={name === "All" ? "/blog" : `/blog?category=${encodeURIComponent(name)}`}
-                aria-current={selected ? "true" : undefined}
-                scroll={false}
-                className={cn(
-                  "inline-flex min-h-11 items-center rounded-full border px-5 text-base font-medium transition-colors",
-                  selected
-                    ? "border-transparent bg-periwinkle-tint text-carbon"
-                    : "border-border text-graphite hover:bg-fog",
-                )}
-              >
-                {name}
-              </Link>
-            )
-          })}
-        </nav>
+        <CategoryNav categories={blogCategories} active={active} />
 
-        <ul className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger key={active} className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" gap={0.09}>
           {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/blog/${post.slug}`} className="group block">
+            <StaggerItem key={post.slug}>
+              <Link href={`/blog/${post.slug}`} data-cursor="Read" className="group block">
                 <div className="relative aspect-[16/10] overflow-hidden rounded bg-fog">
                   <Image
                     src={post.image}
                     alt=""
                     fill
                     sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0 motion-reduce:transition-none"
+                    className="object-cover grayscale transition-[filter,transform] duration-500 group-hover:scale-105 group-hover:grayscale-0 motion-reduce:transition-none"
                   />
                 </div>
                 <p className="mt-4 text-sm text-muted-foreground">
@@ -74,9 +55,9 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
                 </h2>
                 <p className="mt-2 text-base leading-[1.55] text-graphite">{post.excerpt}</p>
               </Link>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </Section>
 
       <ClosingBand

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
+import { SplitHeading } from "@/components/motion/split-heading"
 
 type Tone = "light" | "fog" | "dark"
 
@@ -38,7 +39,7 @@ export function SectionHeading({ title, description, tone = "light", action, cla
   return (
     <div className={cn("flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="max-w-2xl">
-        <h2 className={cn("text-4xl sm:text-[2.5rem]", dark ? "text-white" : "text-foreground")}>{title}</h2>
+        <SplitHeading text={title} inView className={cn("text-4xl sm:text-[2.75rem] sm:leading-[1.08]", dark ? "text-white" : "text-foreground")} />
         {description && (
           <p className={cn("mt-3 text-lg leading-[1.55]", dark ? "text-white/70" : "text-graphite")}>{description}</p>
         )}

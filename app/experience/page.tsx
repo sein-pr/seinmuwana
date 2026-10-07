@@ -2,11 +2,9 @@ import type { Metadata } from "next"
 import { PageHeader } from "@/components/layout/page-header"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
-import { AnimatedSection } from "@/components/ui/animated-section"
+import { ScrollTimeline, TimelineDot } from "@/components/motion/scroll-timeline"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 import { cv } from "@/lib/cv"
-import { DrawLine } from "@/components/motion/draw-line"
-
-const experiences = cv.experience
 
 export const metadata: Metadata = {
   title: "Experience | Sein Muwana",
@@ -23,29 +21,43 @@ export default function ExperiencePage() {
       />
 
       <Section>
-        <ol className="relative border-t border-border">
-          {experiences.map((exp, index) => (
-            <AnimatedSection key={exp.title} animation="fade-up" delay={index * 80}>
-              <li className="relative grid gap-4 py-10 md:grid-cols-[200px_1fr] md:gap-12">
-                <DrawLine />
-                <p className="tabular text-sm text-muted-foreground md:pt-2">{exp.period}</p>
-                <div>
-                  <h2 className="text-3xl text-foreground">{exp.title}</h2>
-                  <p className="mt-1 text-base text-muted-foreground">
-                    {exp.org} · {exp.location}
-                  </p>
-                  <p className="mt-5 max-w-2xl text-lg leading-[1.55] text-graphite">{exp.summary}</p>
-                  <ul className="mt-5 max-w-2xl list-disc space-y-2.5 pl-5 text-base leading-[1.55] text-graphite marker:text-smoke">
+        <ScrollTimeline railClassName="left-[224px]">
+          <ol>
+            {cv.experience.map((exp) => (
+              <li key={exp.title} className="relative grid gap-4 border-t border-border py-12 first:border-t-0 md:grid-cols-[200px_1fr] md:gap-12">
+                <TimelineDot className="left-[224px] top-[3.9rem]" />
+                <Reveal className="md:sticky md:top-28 md:self-start">
+                  <p className="tabular text-sm text-muted-foreground">{exp.period}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{exp.location}</p>
+                </Reveal>
+                <div className="md:pl-10">
+                  <Reveal>
+                    <h2 className="text-3xl text-foreground">{exp.title}</h2>
+                    <p className="mt-1 text-base text-muted-foreground">{exp.org}</p>
+                    <p className="mt-5 max-w-2xl text-lg leading-[1.55] text-graphite">{exp.summary}</p>
+                  </Reveal>
+                  <Stagger className="mt-5 max-w-2xl space-y-3" gap={0.07}>
                     {exp.points.map((point) => (
-                      <li key={point}>{point}</li>
+                      <StaggerItem key={point} className="flex gap-3 text-base leading-[1.55] text-graphite">
+                        <span aria-hidden="true" className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-primary" />
+                        <span>{point}</span>
+                      </StaggerItem>
                     ))}
-                  </ul>
-                  <p className="mt-6 text-sm text-muted-foreground">{exp.skills.join(" · ")}</p>
+                  </Stagger>
+                  <Reveal>
+                    <ul className="mt-6 flex flex-wrap gap-2">
+                      {exp.skills.map((skill) => (
+                        <li key={skill} className="rounded-full bg-lavender-mist px-3 py-1 text-sm text-carbon">
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
                 </div>
               </li>
-            </AnimatedSection>
-          ))}
-        </ol>
+            ))}
+          </ol>
+        </ScrollTimeline>
       </Section>
 
       <ClosingBand

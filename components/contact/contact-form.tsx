@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
+import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -57,7 +58,10 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div role="status" className="rounded-lg border border-border bg-fog p-8">
-        <CheckCircle2 className="h-8 w-8 text-primary" aria-hidden="true" />
+        <svg viewBox="0 0 48 48" className="h-12 w-12" fill="none" aria-hidden="true">
+          <motion.circle cx="24" cy="24" r="21" stroke="#9671ff" strokeWidth="3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6, ease: "easeOut" }} />
+          <motion.path d="M15 25l6 6 12-13" stroke="#1d1d1d" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.5, duration: 0.4, ease: "easeOut" }} />
+        </svg>
         <h3 className="mt-4 text-2xl text-foreground">Message sent</h3>
         <p className="mt-2 text-base leading-[1.55] text-graphite">
           Thanks for writing. I&apos;ll reply to the email address you gave.

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { getProjectBySlug, projects } from "@/lib/projects"
+import { SplitHeading } from "@/components/motion/split-heading"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const dynamicParams = false
 
@@ -42,7 +44,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
           <p className="mt-4 text-base text-white/60">
             {project.subtitle} · {project.status}
           </p>
-          <h1 className="mt-2 max-w-3xl text-[2.5rem] leading-[1.05] text-white sm:text-6xl">{project.title}</h1>
+          <SplitHeading as="h1" text={project.title} delay={0.05} className="mt-2 max-w-3xl text-[2.5rem] leading-[1.05] text-white sm:text-6xl" />
           <p className="mt-5 max-w-2xl text-lg leading-[1.55] text-white/75">{project.summary}</p>
           {(project.liveUrl || project.githubUrl) && (
             <div className="mt-8 flex flex-wrap gap-3">
@@ -70,40 +72,40 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <Section>
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <div className="space-y-10">
-            <div>
+            <Reveal>
               <h2 className="text-2xl text-foreground">Overview</h2>
               <p className="mt-3 max-w-2xl text-lg leading-[1.6] text-graphite">{project.overview}</p>
-            </div>
+            </Reveal>
             {project.problem && (
-              <div>
+              <Reveal>
                 <h2 className="text-2xl text-foreground">The problem</h2>
                 <p className="mt-3 max-w-2xl text-lg leading-[1.6] text-graphite">{project.problem}</p>
-              </div>
+              </Reveal>
             )}
             {project.approach && (
-              <div>
+              <Reveal>
                 <h2 className="text-2xl text-foreground">What I built</h2>
                 <p className="mt-3 max-w-2xl text-lg leading-[1.6] text-graphite">{project.approach}</p>
-              </div>
+              </Reveal>
             )}
           </div>
 
           <aside className="space-y-10">
             <div>
               <h2 className="text-2xl text-foreground">Details</h2>
-              <ul className="mt-4 divide-y divide-border border-y border-border">
+              <Stagger className="mt-4 divide-y divide-border border-y border-border" gap={0.08}>
                 {project.highlights.map((item) => (
-                  <li key={item} className="py-3.5 text-base leading-[1.5] text-graphite">
+                  <StaggerItem key={item} className="py-3.5 text-base leading-[1.5] text-graphite">
                     {item}
-                  </li>
+                  </StaggerItem>
                 ))}
-              </ul>
+              </Stagger>
             </div>
             {project.outcome && (
-              <div className="rounded-lg bg-lavender-mist p-6">
+              <Reveal className="rounded-lg bg-lavender-mist p-6">
                 <h2 className="text-lg text-foreground">Result</h2>
-                <p className="mt-2 text-base leading-[1.55] text-graphite">{project.outcome}</p>
-              </div>
+                <p className="mt-2 text-xl font-semibold leading-[1.4] text-foreground">{project.outcome}</p>
+              </Reveal>
             )}
             <div>
               <h2 className="text-lg text-foreground">Built with</h2>

@@ -4,6 +4,8 @@ import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import { Section } from "@/components/layout/section"
+import { SplitHeading } from "@/components/motion/split-heading"
+import { Reveal } from "@/components/motion/reveal"
 import { certifications, getCertificationBySlug } from "@/lib/certifications"
 
 export const dynamicParams = false
@@ -43,7 +45,7 @@ export default async function CertificationDetailPage({ params }: { params: Para
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             All certifications
           </Link>
-          <h1 className="mt-4 max-w-3xl text-[2.25rem] leading-[1.08] text-white sm:text-5xl">{certification.title}</h1>
+          <SplitHeading as="h1" text={certification.title} delay={0.05} className="mt-4 max-w-3xl text-[2.25rem] leading-[1.08] text-white sm:text-5xl" />
           <p className="mt-4 text-lg text-white/75">
             {certification.issuer} · <span className="tabular">{issued}</span>
           </p>
@@ -64,12 +66,12 @@ export default async function CertificationDetailPage({ params }: { params: Para
 
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
-          <div>
+          <Reveal>
             <h2 className="text-2xl text-foreground">Overview</h2>
             <p className="mt-4 max-w-2xl text-lg leading-[1.6] text-graphite">{certification.fullDescription}</p>
             <h2 className="mt-10 text-2xl text-foreground">Skills covered</h2>
             <p className="mt-4 text-base leading-[1.7] text-graphite">{certification.skills.join(" · ")}</p>
-          </div>
+          </Reveal>
           <dl className="divide-y divide-border border-y border-border text-base">
             <div className="flex justify-between gap-4 py-4">
               <dt className="text-muted-foreground">Category</dt>
