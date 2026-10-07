@@ -1,111 +1,121 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
+import { ArrowRight } from "lucide-react"
+import { useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
-import { ProfileSlider } from "@/components/profile-slider"
+import { SplitHeading } from "@/components/motion/split-heading"
 
-const tags = ["Full-Stack", "AI & Machine Learning", "Process Automation", "Quality Assurance"]
+const tags = ["Full-stack", "Automation (RPA)", "Computer vision", "Testing and QA"]
+const workedWith = ["Agribank", "University of Namibia", "Power Automate", "UiPath", "Neo4j"]
 
-type GitHubStats = {
-  commits: number | null
-  projects: number | null
-  githubUrl: string
+/** A checkbox that ticks itself after a delay. */
+function TickBox({ delay }: { delay: number }) {
+  const reduce = useReducedMotion()
+  return (
+    <svg viewBox="0 0 16 16" className="h-4 w-4 shrink-0" aria-hidden="true" fill="none">
+      <rect x="1" y="1" width="14" height="14" rx="3" className="stroke-carbon/50" strokeWidth="1.5" />
+      <motion.path
+        d="M4.5 8.4l2.4 2.4 4.6-5"
+        stroke="#9671ff"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={reduce ? false : { pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ delay, duration: 0.35, ease: "easeOut" }}
+      />
+    </svg>
+  )
 }
 
 export function HeroSection() {
-  const [stats, setStats] = useState<GitHubStats | null>(null)
+  const reduce = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
+  const imageY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 60])
 
-  useEffect(() => {
-    fetch("/api/github-stats")
-      .then((res) => (res.ok ? (res.json() as Promise<GitHubStats>) : null))
-      .then((data) => data && setStats(data))
-      .catch(() => {
-        // Non-blocking: the hero reads fine without live stats.
-      })
-  }, [])
-
-  const facts = [
-    stats?.commits != null ? `${stats.commits.toLocaleString()} commits` : null,
-    stats?.projects != null ? `${stats.projects} public projects` : null,
-  ].filter(Boolean)
+  const rise = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { delay, duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+        }
 
   return (
-    <section className="bg-midnight text-white">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-24">
-        <div className="motion-safe:[&>*]:animate-rise">
-          <h1 className="text-[2.75rem] leading-[1.05] text-white sm:text-6xl lg:text-[4.5rem]">
-            Software that removes the busywork.
-          </h1>
-          <p style={{ "--delay": "80ms" } as React.CSSProperties} className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
-            I&apos;m Sein Muwana, a software engineer in Windhoek. I build full-stack systems, AI tools and RPA bots in
-            C#, Java and Python, and I&apos;ve shipped them inside a bank.
-          </p>
+    <section ref={ref} className="overflow-hidden bg-midnight text-white">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 pb-14 pt-14 sm:pt-20 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pb-16 lg:pt-24">
+        <div>
+          <SplitHeading
+            as="h1"
+            text="Software that removes the busywork."
+            delay={0.1}
+            className="text-[2.75rem] leading-[1.05] text-white sm:text-6xl lg:text-[4.5rem]"
+          />
+          <motion.p {...rise(0.55)} className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
+            I&apos;m Sein Muwana, a software engineer in Windhoek. I build web systems, RPA bots and computer-vision tools
+            that replace manual process, and I&apos;ve shipped them inside a bank.
+          </motion.p>
 
-          <ul style={{ "--delay": "160ms" } as React.CSSProperties} className="mt-8 flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <li
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {tags.map((tag, i) => (
+              <motion.li
                 key={tag}
-                className="rounded-full bg-periwinkle-tint px-3.5 py-1.5 text-sm font-medium text-carbon"
+                {...rise(0.7 + i * 0.08)}
+                className="flex items-center gap-2 rounded-full bg-periwinkle-tint px-3.5 py-1.5 text-sm font-medium text-carbon"
               >
+                <TickBox delay={1.15 + i * 0.25} />
                 {tag}
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          <div style={{ "--delay": "240ms" } as React.CSSProperties} className="mt-10 flex flex-wrap items-center gap-3">
+          <motion.div {...rise(1.0)} className="mt-10 flex flex-wrap items-center gap-3">
             <Button asChild size="lg">
               <Link href="/contact">
                 Contact me
                 <ArrowRight />
               </Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white bg-transparent text-white hover:bg-white/10"
-            >
+            <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white/10">
               <Link href="/projects">See my work</Link>
             </Button>
-          </div>
-
-          <div style={{ "--delay": "320ms" } as React.CSSProperties} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
-            <div className="flex items-center gap-4">
-              <a
-                href={stats?.githubUrl ?? "https://github.com/sein-pr"}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="transition-colors hover:text-white"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/sein-muwana-2ab319299/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="transition-colors hover:text-white"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="mailto:seinprince2@gmail.com" aria-label="Email" className="transition-colors hover:text-white">
-                <Mail className="h-5 w-5" />
-              </a>
-            </div>
-            {facts.length > 0 && <p className="tabular">{facts.join(" · ")}</p>}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mx-auto w-full max-w-[380px] lg:ml-auto">
-          <ProfileSlider />
-          <p className="mt-4 text-sm text-white/70">
-            Sein Muwana · BSc Computer Science (Honours), University of Namibia
-          </p>
-        </div>
+        <motion.div
+          className="mx-auto w-full max-w-[380px] lg:ml-auto"
+          initial={reduce ? false : { clipPath: "inset(0 0 100% 0)" }}
+          animate={{ clipPath: "inset(0 0 0% 0)" }}
+          transition={{ delay: 0.25, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.div style={{ y: imageY }} className="relative aspect-[4/5] overflow-hidden rounded">
+            <Image
+              src="/images/profile.jpg"
+              alt="Sein Muwana in a navy blazer"
+              fill
+              priority
+              sizes="(min-width: 1024px) 380px, 90vw"
+              className="object-cover object-top"
+            />
+          </motion.div>
+        </motion.div>
       </div>
+
+      <motion.div {...rise(1.3)} className="border-t border-white/10">
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-8 gap-y-3 px-6 py-6">
+          <p className="text-sm text-white/60">Worked with</p>
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 text-base font-semibold text-white/80">
+            {workedWith.map((name) => (
+              <li key={name}>{name}</li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
     </section>
   )
 }

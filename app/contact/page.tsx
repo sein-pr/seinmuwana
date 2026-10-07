@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone, Linkedin } from "lucide-react"
 import { PageHeader } from "@/components/layout/page-header"
 import { Section } from "@/components/layout/section"
 import { ContactForm } from "@/components/contact/contact-form"
+import { CopyEmail } from "@/components/contact/copy-email"
 
 export const metadata: Metadata = {
   title: "Contact | Sein Muwana",
@@ -67,6 +68,7 @@ export default function ContactPage() {
                       <p className="text-base text-foreground">{item.value}</p>
                     )}
                   </div>
+                  {item.label === "Email" && <div className="ml-auto"><CopyEmail email={item.value} /></div>}
                 </li>
               ))}
             </ul>

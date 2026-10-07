@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { blogPosts, getPostBySlug, readTime } from "@/lib/blog"
+import { ReadingProgress } from "@/components/blog/reading-progress"
 
 export const dynamicParams = false
 
@@ -32,6 +33,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <>
+      <ReadingProgress />
       <header className="bg-midnight text-white">
         <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
           <Link

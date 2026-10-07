@@ -4,9 +4,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { CommandMenu } from "@/components/command-menu"
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -24,6 +25,7 @@ export function Header() {
   const mobileMenuOpen = openedOn === pathname
   const setMobileMenuOpen = (open: boolean) => setOpenedOn(open ? pathname : null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+  const [searchOpen, setSearchOpen] = useState(false)
 
   useEffect(() => {
     if (!mobileMenuOpen) return
@@ -72,6 +74,16 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:items-center lg:gap-6">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            className="flex h-9 items-center gap-2 rounded-full border border-white/20 pl-3 pr-2 text-sm text-white/70 transition-colors hover:border-white/40 hover:text-white"
+            aria-label="Search the site"
+          >
+            <Search className="h-4 w-4" aria-hidden="true" />
+            Search
+            <kbd className="rounded bg-white/10 px-1.5 py-0.5 font-sans text-xs text-white/70">Ctrl K</kbd>
+          </button>
           <Link href="/cv" className="text-base font-medium text-white/70 transition-colors hover:text-white">
             View CV
           </Link>
@@ -80,6 +92,15 @@ export function Header() {
           </Button>
         </div>
 
+        <div className="flex items-center lg:hidden">
+        <button
+          type="button"
+          onClick={() => setSearchOpen(true)}
+          aria-label="Search the site"
+          className="inline-flex size-11 items-center justify-center rounded-full text-white hover:bg-white/10"
+        >
+          <Search className="h-5 w-5" aria-hidden="true" />
+        </button>
         <button
           type="button"
           className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white hover:bg-white/10 lg:hidden"
@@ -91,6 +112,7 @@ export function Header() {
           <span className="sr-only">Toggle menu</span>
           {mobileMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
         </button>
+        </div>
       </nav>
 
       {mobileMenuOpen && (
@@ -119,6 +141,7 @@ export function Header() {
           </div>
         </div>
       )}
+      <CommandMenu open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   )
 }
