@@ -1,75 +1,86 @@
 "use client"
 
+import { useRef } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
+import { usePrefersReducedMotion as useReducedMotion } from "@/lib/use-reduced-motion"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
-import { AnimatedSection } from "@/components/ui/animated-section"
-import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Section } from "@/components/layout/section"
 import { getProjectBySlug } from "@/lib/projects"
 
-const featuredSlugs = ["agrisense", "finance-dashboard", "client-data-cleanup"]
-const projects = featuredSlugs.map((slug) => getProjectBySlug(slug)!)
+const featured = [
+  { slug: "agrisense", stat: "93.8%", statLabel: "mAP50-95 across 9 tomato leaf classes", tone: "bg-lavender-mist" },
+  { slug: "finance-dashboard", stat: "1 week → live", statLabel: "prep time before each war room meeting", tone: "bg-fog" },
+  { slug: "client-data-cleanup", stat: "4,000 → <500", statLabel: "client records with bad data", tone: "bg-periwinkle-tint" },
+]
+
+function StackCard({
+  index,
+  total,
+  progress,
+  slug,
+  stat,
+  statLabel,
+  tone,
+}: (typeof featured)[number] & { index: number; total: number; progress: MotionValue<number> }) {
+  const reduce = useReducedMotion()
+  const project = getProjectBySlug(slug)!
+  // Each card shrinks and dims a little as the next one slides over it.
+  const target = 1 - (total - index - 1) * 0.045
+  const scale = useTransform(progress, [index / total, 1], reduce ? [1, 1] : [1, target])
+
+  return (
+    <div className="sticky" style={{ top: `calc(5.5rem + ${index * 1.1}rem)` }}>
+      <motion.div style={{ scale, transformOrigin: "top center" }}>
+        <Link
+          href={`/projects/${project.slug}`}
+          data-cursor="Open"
+          className={`group grid min-h-[22rem] gap-8 rounded-lg border border-foreground/10 p-7 transition-colors sm:p-10 lg:grid-cols-[1.2fr_1fr] ${tone}`}
+        >
+          <div className="flex flex-col justify-between">
+            <div>
+              <p className="text-sm text-graphite">{project.subtitle}</p>
+              <h3 className="mt-2 text-3xl font-extrabold text-foreground sm:text-4xl">{project.title}</h3>
+              <p className="mt-4 max-w-md text-lg leading-[1.55] text-graphite">{project.summary}</p>
+            </div>
+            <p className="mt-8 flex items-center gap-2 text-base font-medium text-foreground">
+              Read the case study
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none" />
+            </p>
+          </div>
+          <div className="flex flex-col justify-end border-t border-foreground/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <p className="tabular text-5xl font-extrabold leading-none text-foreground sm:text-6xl">{stat}</p>
+            <p className="mt-3 max-w-[16rem] text-base leading-[1.4] text-graphite">{statLabel}</p>
+            <p className="mt-6 text-sm text-graphite">{project.tags.slice(0, 4).join(" · ")}</p>
+          </div>
+        </Link>
+      </motion.div>
+    </div>
+  )
+}
 
 export function ProjectsPreview() {
-  return (
-    <section className="bg-background py-20">
-      <div className="mx-auto max-w-[1200px] px-6">
-        <AnimatedSection animation="fade-up">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Selected projects</h2>
-              <p className="mt-3 max-w-xl text-lg leading-[1.55] text-[#383838]">
-                Academic research and professional builds, each solving a concrete problem.
-              </p>
-            </div>
-            <Button asChild variant="outline" className="w-fit">
-              <Link href="/projects">
-                All projects
-                <ArrowRight />
-              </Link>
-            </Button>
-          </div>
-        </AnimatedSection>
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-5">
-          {projects.map((project, index) => (
-            <AnimatedSection
-              key={project.title}
-              animation="fade-up"
-              delay={index * 80}
-              className={cn(project.featured ? "lg:col-span-3 lg:row-span-2" : "lg:col-span-2")}
-            >
-              <Link
-                href={`/projects/${project.slug}`}
-                className={cn(
-                  "group flex h-full flex-col justify-between rounded-lg border p-6 transition-colors",
-                  project.featured
-                    ? "border-transparent bg-lavender-mist hover:bg-periwinkle-tint lg:p-10"
-                    : "border-border bg-background hover:bg-fog",
-                )}
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className={cn("text-foreground", project.featured ? "text-3xl font-extrabold" : "text-xl")}>
-                      {project.title}
-                    </h3>
-                    <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </div>
-                  <p
-                    className={cn(
-                      "mt-3 leading-[1.55] text-[#383838]",
-                      project.featured ? "max-w-lg text-lg" : "text-base",
-                    )}
-                  >
-                    {project.summary}
-                  </p>
-                </div>
-                <p className="mt-8 text-sm text-muted-foreground">{project.tags.join(" · ")}</p>
-              </Link>
-            </AnimatedSection>
-          ))}
-        </div>
+  return (
+    <Section tone="fog" className="pb-24">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <h2 className="max-w-2xl text-4xl text-foreground sm:text-[3.5rem] sm:leading-[1.06]">Selected work.</h2>
+        <Button asChild variant="outline" className="w-fit bg-background">
+          <Link href="/projects">
+            All projects
+            <ArrowRight />
+          </Link>
+        </Button>
       </div>
-    </section>
+
+      <div ref={ref} className="mt-12 space-y-6 pb-[18vh]">
+        {featured.map((item, i) => (
+          <StackCard key={item.slug} {...item} index={i} total={featured.length} progress={scrollYProgress} />
+        ))}
+      </div>
+    </Section>
   )
 }

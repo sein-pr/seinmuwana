@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { AnimatedSection } from "@/components/ui/animated-section"
 import { cv } from "@/lib/cv"
+import { DrawLine } from "@/components/motion/draw-line"
 
 const experiences = cv.experience
 
@@ -22,10 +23,11 @@ export default function ExperiencePage() {
       />
 
       <Section>
-        <ol className="border-t border-border">
+        <ol className="relative border-t border-border">
           {experiences.map((exp, index) => (
             <AnimatedSection key={exp.title} animation="fade-up" delay={index * 80}>
-              <li className="grid gap-4 border-b border-border py-10 md:grid-cols-[200px_1fr] md:gap-12">
+              <li className="relative grid gap-4 py-10 md:grid-cols-[200px_1fr] md:gap-12">
+                <DrawLine />
                 <p className="tabular text-sm text-muted-foreground md:pt-2">{exp.period}</p>
                 <div>
                   <h2 className="text-3xl text-foreground">{exp.title}</h2>

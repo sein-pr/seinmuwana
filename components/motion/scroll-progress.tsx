@@ -1,9 +1,10 @@
 "use client"
 
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react"
+import { motion, useScroll, useSpring } from "motion/react"
+import { usePrefersReducedMotion as useReducedMotion } from "@/lib/use-reduced-motion"
 
-/** Thin bar under the header that fills as the article is read. */
-export function ReadingProgress() {
+/** Thin violet bar under the header that fills as the page is read. */
+export function ScrollProgress() {
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 220, damping: 30, restDelta: 0.001 })

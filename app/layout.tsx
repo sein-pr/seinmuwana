@@ -5,6 +5,10 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { SmoothScroll } from '@/components/motion/smooth-scroll'
+import { MotionProvider } from '@/components/motion/motion-provider'
+import { Cursor } from '@/components/motion/cursor'
+import { ScrollProgress } from '@/components/motion/scroll-progress'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: "600", variable: "--font-plex" });
@@ -81,11 +85,16 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <MotionProvider>
+        <SmoothScroll />
+        <Cursor />
+        <ScrollProgress />
         <Header />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>
         <Footer />
+        </MotionProvider>
         <Analytics />
       </body>
     </html>
