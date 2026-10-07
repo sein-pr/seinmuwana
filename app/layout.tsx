@@ -14,8 +14,7 @@ export const metadata: Metadata = {
   title: 'Sein Muwana | Software Engineer | Automation Specialist | QA Engineer | Namibia',
   description:
     'Sein Muwana is a Software Engineer and Automation Specialist based in Namibia with experience in full-stack development, RPA using Power Automate and UiPath, Quality Assurance, database systems, and banking ICT solutions.',
-  generator: 'v0.app',
-  keywords: [
+    keywords: [
     'Sein Muwana',
     'Software Engineer Namibia',
     'Automation Specialist Namibia',
@@ -85,8 +84,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${plex.variable} font-sans antialiased`}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-white focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-carbon"
+        >
+          Skip to content
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
         <Footer />
         <Analytics />
       </body>

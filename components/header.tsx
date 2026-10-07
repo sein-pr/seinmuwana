@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -20,13 +20,30 @@ const navigation = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const toggleRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    document.addEventListener("keydown", onKey)
+    return () => document.removeEventListener("keydown", onKey)
+  }, [mobileMenuOpen])
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-carbon text-white">
       <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2.5">
+        <Link href="/" className="flex min-h-11 items-center gap-2.5">
           <Image
             src="/SD Logo.png"
             alt=""
@@ -66,8 +83,10 @@ export function Header() {
 
         <button
           type="button"
-          className="-m-2.5 inline-flex items-center justify-center rounded-full p-2.5 text-white lg:hidden"
+          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white hover:bg-white/10 lg:hidden"
+          ref={toggleRef}
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <span className="sr-only">Toggle menu</span>
@@ -76,14 +95,14 @@ export function Header() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="border-t border-white/10 lg:hidden">
+        <div id="mobile-menu" className="border-t border-white/10 lg:hidden">
           <div className="space-y-1 px-6 pb-5 pt-3">
             {[...navigation, { name: "CV", href: "/cv" }].map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "block rounded-lg px-3 py-2.5 text-base font-medium",
+                  "block rounded-lg px-3 py-3 text-base font-medium",
                   isActive(item.href) ? "bg-white/10 text-white" : "text-white/70 hover:bg-white/5 hover:text-white",
                 )}
                 onClick={() => setMobileMenuOpen(false)}

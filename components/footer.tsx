@@ -37,7 +37,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1200px] px-6 py-12">
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex min-h-11 items-center gap-2">
             <Image 
               src="/SD Logo.png" 
               alt="" 
@@ -51,12 +51,12 @@ export function Footer() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2">
+          <nav aria-label="Footer" className="flex flex-wrap justify-center gap-x-2 gap-y-1">
             {navigation.main.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex min-h-11 items-center px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.name}
               </Link>
@@ -64,14 +64,14 @@ export function Footer() {
           </nav>
 
           {/* Social Links */}
-          <div className="flex gap-6">
+          <div className="flex gap-2">
             {navigation.social.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex size-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-fog hover:text-foreground"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-5 w-5" aria-hidden="true" />

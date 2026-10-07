@@ -18,19 +18,19 @@ interface AnimatedSectionProps {
 
 const animationClasses: Record<AnimationType, { initial: string; animate: string }> = {
   "fade-up": {
-    initial: "opacity-0 translate-y-8",
+    initial: "opacity-0 translate-y-4",
     animate: "opacity-100 translate-y-0",
   },
   "fade-down": {
-    initial: "opacity-0 -translate-y-8",
+    initial: "opacity-0 -translate-y-4",
     animate: "opacity-100 translate-y-0",
   },
   "fade-left": {
-    initial: "opacity-0 translate-x-8",
+    initial: "opacity-0 translate-x-4",
     animate: "opacity-100 translate-x-0",
   },
   "fade-right": {
-    initial: "opacity-0 -translate-x-8",
+    initial: "opacity-0 -translate-x-4",
     animate: "opacity-100 translate-x-0",
   },
   "zoom-in": {
@@ -48,7 +48,7 @@ export function AnimatedSection({
   className,
   animation = "fade-up",
   delay = 0,
-  duration = 700,
+  duration = 500,
   threshold = 0.1,
 }: AnimatedSectionProps) {
   const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ threshold })
@@ -58,7 +58,7 @@ export function AnimatedSection({
     <div
       ref={ref}
       className={cn(
-        "transition-all ease-out",
+        "transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:translate-x-0 motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-0",
         isVisible ? animate : initial,
         className
       )}
