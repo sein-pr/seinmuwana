@@ -18,19 +18,18 @@ const navigation = [
 ]
 
 export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  // Remember the route the menu was opened on, so navigating closes it without an effect.
+  const [openedOn, setOpenedOn] = useState<string | null>(null)
+  const mobileMenuOpen = openedOn === pathname
+  const setMobileMenuOpen = (open: boolean) => setOpenedOn(open ? pathname : null)
   const toggleRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [pathname])
 
   useEffect(() => {
     if (!mobileMenuOpen) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMobileMenuOpen(false)
+        setOpenedOn(null)
         toggleRef.current?.focus()
       }
     }

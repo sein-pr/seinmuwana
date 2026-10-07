@@ -44,8 +44,14 @@ const skills = [
   ["Backend", "Python, Flask, Flask-RESTX, Django, Django REST Framework, C# (.NET), Java, PHP"],
   ["Frontend", "React, Next.js, JavaScript, HTML, CSS"],
   ["Mobile", "React Native, Flutter"],
-  ["Data", "PostgreSQL (local and hosted, e.g. Supabase), SQL, database design"],
+  ["Data", "PostgreSQL (local and hosted, e.g. Supabase), SQL Server, SQL, database design"],
   ["Tools", "Git, GitHub, CI/CD, Power Automate, UiPath, n8n, Freshworks"],
+]
+
+const references = [
+  { name: "Mr Romeo Tawana", role: "Data Analyst, Agribank", email: "rtawana@agribank.com.na" },
+  { name: "Dr. Nalina Suresh", role: "Lecturer, University of Namibia", email: "nsuresh@unam.na" },
+  { name: "Ms Rachel Nawa", role: "Business System Analyst, Agribank", email: "rnawa@agribank.com.na" },
 ]
 
 export default function CVPage() {
@@ -115,9 +121,9 @@ export default function CVPage() {
             <article className="py-5">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 className="text-lg text-foreground">BSc Computer Science (Honours)</h3>
-                <p className="tabular text-sm text-muted-foreground">2021 – 2025</p>
+                <p className="tabular text-sm text-muted-foreground">2021 – 2026</p>
               </div>
-              <p className="text-base text-muted-foreground">University of Namibia</p>
+              <p className="text-base text-muted-foreground">University of Namibia · Graduated 2026</p>
               <p className="mt-2 text-base text-graphite">
                 Thesis: AgriSense, a real-time crop monitoring and disease detection system.
               </p>
@@ -157,9 +163,17 @@ export default function CVPage() {
           </div>
           <div>
             <h2 className="text-2xl text-foreground">References</h2>
-            <p className="mt-3 text-base leading-[1.6] text-graphite">
-              Available on request. Three referees from Agribank and the University of Namibia.
-            </p>
+            <ul className="mt-3 space-y-4 text-base leading-[1.5] text-graphite">
+              {references.map((ref) => (
+                <li key={ref.name}>
+                  <p className="font-semibold text-foreground">{ref.name}</p>
+                  <p>{ref.role}</p>
+                  <a href={`mailto:${ref.email}`} className="inline-flex min-h-9 items-center break-all underline underline-offset-4">
+                    {ref.email}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       </div>

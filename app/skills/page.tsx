@@ -12,7 +12,7 @@ const groups = [
   { title: "Backend", items: ["Python", "Flask and Flask-RESTX", "Django and Django REST Framework", "C# (.NET)", "Java", "PHP"] },
   { title: "Frontend", items: ["React", "Next.js", "JavaScript", "HTML and CSS"] },
   { title: "Mobile", items: ["React Native", "Flutter and Dart"] },
-  { title: "Data", items: ["PostgreSQL (local and hosted, e.g. Supabase)", "SQL", "Database design"] },
+  { title: "Data", items: ["PostgreSQL (local and hosted, e.g. Supabase)", "SQL Server", "SQL", "Database design"] },
   { title: "Automation and tooling", items: ["Power Automate", "UiPath", "n8n", "Freshworks", "Git and GitHub", "CI/CD"] },
   { title: "Machine learning", items: ["Computer vision with YOLO models", "Attention modules (CBAM)", "Model training in Jupyter"] },
   { title: "Practice", items: ["Requirements gathering", "System and acceptance testing", "Project coordination"] },

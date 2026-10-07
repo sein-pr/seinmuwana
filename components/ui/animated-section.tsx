@@ -92,7 +92,7 @@ export function AnimatedItem({
   staggerDelay = 100,
 }: AnimatedItemProps) {
   const totalDelay = delay + index * staggerDelay
-  const { initial, animate } = animationClasses[animation]
+  const { animate } = animationClasses[animation]
 
   return (
     <div

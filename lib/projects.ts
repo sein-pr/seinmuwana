@@ -60,7 +60,7 @@ export const projects: Project[] = [
       "System testing and user acceptance testing supported before release",
     ],
     outcome: "Improved efficiency by up to 80%.",
-    tags: ["C#", "Full-stack", "Databases"],
+    tags: ["C#", "SQL Server", "Full-stack"],
     liveUrl: null,
     githubUrl: null,
   },

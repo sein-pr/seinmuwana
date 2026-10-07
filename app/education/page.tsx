@@ -8,7 +8,7 @@ import { ClosingBand } from "@/components/layout/closing-band"
 export const metadata: Metadata = {
   title: "Education | Sein Muwana",
   description:
-    "BSc Computer Science Honours at the University of Namibia, with an honours thesis on crop disease detection.",
+    "BSc Computer Science Honours (graduated 2026) from the University of Namibia, with an honours thesis on crop disease detection.",
 }
 
 const training = [
@@ -27,10 +27,10 @@ export default function EducationPage() {
       <Section>
         <ol className="border-t border-border">
           <li className="grid gap-4 border-b border-border py-10 md:grid-cols-[200px_1fr] md:gap-12">
-            <p className="tabular text-sm text-muted-foreground md:pt-2">2021 – 2025</p>
+            <p className="tabular text-sm text-muted-foreground md:pt-2">2021 – 2026</p>
             <div>
               <h2 className="text-3xl text-foreground">BSc Computer Science (Honours)</h2>
-              <p className="mt-1 text-base text-muted-foreground">University of Namibia</p>
+              <p className="mt-1 text-base text-muted-foreground">University of Namibia · Graduated 2026</p>
               <div className="mt-6 max-w-2xl rounded-lg bg-lavender-mist p-6">
                 <h3 className="text-lg text-foreground">Thesis: AgriSense</h3>
                 <p className="mt-2 text-base leading-[1.6] text-graphite">

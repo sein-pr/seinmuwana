@@ -59,7 +59,7 @@ export default function AboutPage() {
           <div className="space-y-5 text-lg leading-[1.6] text-graphite">
             <p>
               I&apos;m a Computer Science Honours graduate from the University of Namibia. I work mostly in Python, C#,
-              Java and JavaScript, with Flask, Django, React and Next.js on the web side and PostgreSQL for data.
+              Java and JavaScript, with Flask, Django, React and Next.js on the web side, and PostgreSQL and SQL Server for data.
             </p>
             <p>
               In 2025 I interned as a software developer at the Agricultural Bank of Namibia. I built a user access
