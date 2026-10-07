@@ -11,9 +11,9 @@ const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: "600", variable: "--fon
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seinmuwana.netlify.app'),
-  title: 'Sein Muwana | Software Engineer | Automation Specialist | QA Engineer | Namibia',
+  title: 'Sein Muwana | Data Analyst and Software Engineer | Namibia',
   description:
-    'Sein Muwana is a Software Engineer and Automation Specialist based in Namibia with experience in full-stack development, RPA using Power Automate and UiPath, Quality Assurance, database systems, and banking ICT solutions.',
+    'Sein Muwana is a data analyst and software engineer at Agribank Namibia, working with SQL, Power BI, Python, RPA and computer vision.',
     keywords: [
     'Sein Muwana',
     'Software Engineer Namibia',
@@ -43,18 +43,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Sein Muwana | Software Engineer | Automation Specialist',
+    title: 'Sein Muwana | Data Analyst and Software Engineer',
     description:
-      'Portfolio of Sein Muwana, Software Engineer specializing in automation, RPA, quality assurance, and scalable full-stack systems.',
+      'Portfolio of Sein Muwana: data, reporting, RPA automation and computer-vision projects from Windhoek, Namibia.',
     type: 'website',
     url: 'https://seinmuwana.netlify.app',
     siteName: 'Sein Muwana Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sein Muwana | Software Engineer | Automation Specialist',
+    title: 'Sein Muwana | Data Analyst and Software Engineer',
     description:
-      'Portfolio of Sein Muwana, Software Engineer specializing in automation, RPA, quality assurance, and scalable full-stack systems.',
+      'Portfolio of Sein Muwana: data, reporting, RPA automation and computer-vision projects from Windhoek, Namibia.',
   },
   icons: {
     icon: '/SD Logo.png',

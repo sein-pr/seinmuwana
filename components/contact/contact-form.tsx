@@ -15,6 +15,7 @@ export function ContactForm() {
   const [values, setValues] = useState(empty)
   const [status, setStatus] = useState<Status>("idle")
   const [error, setError] = useState("")
+  const [code, setCode] = useState("")
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
 
   const update = (key: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -24,6 +25,7 @@ export function ContactForm() {
     e.preventDefault()
     setStatus("sending")
     setError("")
+    setCode("")
     setFieldErrors({})
 
     try {
@@ -32,11 +34,12 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       })
-      const data = (await res.json().catch(() => ({}))) as { error?: string; fields?: FieldErrors }
+      const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string; fields?: FieldErrors }
 
       if (!res.ok) {
         setFieldErrors(data.fields ?? {})
         setError(data.error ?? "Your message couldn't be sent. Please try again.")
+        setCode(data.code ?? "")
         setStatus("error")
         return
       }
@@ -90,7 +93,9 @@ export function ContactForm() {
 
       <div aria-live="polite">
         {status === "error" && (
-          <p className="rounded-lg border border-destructive/40 bg-destructive/5 px-4 py-3 text-sm text-foreground">{error}</p>
+          <p className="rounded-lg border border-destructive/40 bg-destructive/5 px-4 py-3 text-sm text-foreground">{error}
+            {code && <span className="mt-1 block text-xs text-muted-foreground">Error code: {code}</span>}
+          </p>
         )}
       </div>
 

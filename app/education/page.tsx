@@ -12,8 +12,10 @@ export const metadata: Metadata = {
 }
 
 const training = [
-  { title: "Power Automate training", issuer: "Microsoft", note: "Process automation with cloud flows." },
-  { title: "UiPath RPA developer training", issuer: "UiPath", note: "Building and running RPA bots." },
+  { title: "Elements of Data Science", issuer: "EPFL Extension School", note: "Verified certificate of attendance, April 2026." },
+  { title: "Neo4j Graph Data Science", issuer: "Neo4j GraphAcademy", note: "Certificate issued April 2024." },
+  { title: "Neo4j Fundamentals", issuer: "Neo4j GraphAcademy", note: "Certificate issued April 2024." },
+  { title: "Power Automate and UiPath training", issuer: "Microsoft, UiPath", note: "Process automation and RPA development." },
 ]
 
 export default function EducationPage() {
@@ -30,16 +32,17 @@ export default function EducationPage() {
             <p className="tabular text-sm text-muted-foreground md:pt-2">2021 – 2026</p>
             <div>
               <h2 className="text-3xl text-foreground">BSc Computer Science (Honours)</h2>
-              <p className="mt-1 text-base text-muted-foreground">University of Namibia · Graduated 2026</p>
+              <p className="mt-1 text-base text-muted-foreground">University of Namibia · Upper Second Class · Graduated 2026</p>
               <div className="mt-6 max-w-2xl rounded-lg bg-lavender-mist p-6">
                 <h3 className="text-lg text-foreground">Thesis: AgriSense</h3>
                 <p className="mt-2 text-base leading-[1.6] text-graphite">
-                  Developing a real-time crop monitoring and disease detection system. Supervised by Dr. Nalina Suresh,
-                  submitted October 2025.
+                  A real-time crop monitoring and disease detection system. Supervised by Dr. Nalina Suresh, submitted
+                  October 2025. Relevant modules: Artificial Intelligence, Data Warehousing and Data Mining, Emerging
+                  Technologies (88%) and Research Methodology.
                 </p>
                 <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-[1.55] text-graphite marker:text-smoke">
                   <li>Enhanced YOLOv8 with CBAM attention and a BiRepGFPN feature pyramid.</li>
-                  <li>Detects tomato leaf diseases such as early blight and septoria.</li>
+                  <li>Detects 9 tomato leaf classes. mAP50-95 93.8%, accuracy 92.2%, precision 92.4%, recall 94.1%.</li>
                   <li>Combines detections with soil and weather API data for farmer-facing advice.</li>
                   <li>IoT sensor support is planned as future work.</li>
                 </ul>

@@ -83,9 +83,14 @@ export async function POST(request: Request) {
     })
 
     if (!res.ok) {
-      console.error("contact: Resend responded", res.status, await res.text())
+      // Resend explains itself in the body (unverified domain, invalid key, test-mode recipient). Keep it in the logs.
+      const detail = await res.text()
+      console.error(`contact: Resend responded ${res.status} (from: ${from}, to: ${to})`, detail)
       return NextResponse.json(
-        { error: "Your message couldn't be sent. Please try again, or email seinprince2@gmail.com." },
+        {
+          error: "Your message couldn't be sent. Please try again, or email seinprince2@gmail.com.",
+          code: `resend_${res.status}`,
+        },
         { status: 502 },
       )
     }
@@ -93,7 +98,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("contact: request to Resend failed", error)
     return NextResponse.json(
-      { error: "Your message couldn't be sent. Please try again, or email seinprince2@gmail.com." },
+      { error: "Your message couldn't be sent. Please try again, or email seinprince2@gmail.com.", code: "resend_unreachable" },
       { status: 502 },
     )
   }

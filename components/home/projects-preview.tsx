@@ -7,7 +7,7 @@ import { AnimatedSection } from "@/components/ui/animated-section"
 import { cn } from "@/lib/utils"
 import { getProjectBySlug } from "@/lib/projects"
 
-const featuredSlugs = ["agrisense", "rpa-automation-suite", "user-access-management"]
+const featuredSlugs = ["agrisense", "finance-dashboard", "client-data-cleanup"]
 const projects = featuredSlugs.map((slug) => getProjectBySlug(slug)!)
 
 export function ProjectsPreview() {

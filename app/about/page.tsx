@@ -10,21 +10,21 @@ import { ClosingBand } from "@/components/layout/closing-band"
 export const metadata: Metadata = {
   title: "About | Sein Muwana",
   description:
-    "Sein Muwana is a computer science graduate in Windhoek who builds full-stack software, RPA automations and computer-vision tools for agriculture.",
+    "Sein Muwana is a data analyst and software engineer at Agribank Namibia who builds reporting, ETL pipelines, RPA automations and computer-vision tools.",
 }
 
 const practice = [
   {
     title: "Requirements first",
-    body: "At Agribank I gathered and documented the requirements for the website revamp before any build started, then coordinated business and technical teams through delivery.",
+    body: "I wrote the Software Requirements Specification for Agribank's website revamp with more than 12 people from ICT, Marketing and Operations, before any build started.",
   },
   {
-    title: "Test before handover",
-    body: "I run system tests and support user acceptance testing, so the people who rely on a tool find problems before launch, not after.",
+    title: "Prove the numbers",
+    body: "I reconcile reports line by line against the source, and wrote Python scripts to prove the SAP-to-Swordfish robots move data accurately.",
   },
   {
     title: "Remove the manual step",
-    body: "My user access system and RPA bots replaced paper and spreadsheet steps. The access system improved efficiency by up to 80%, and the bots cut manual processes by about 75%.",
+    body: "A data-access application improved efficiency by 80%, the RPA robots cut manual effort by 75%, and a dashboard replaced a week of report preparation.",
   },
 ]
 
@@ -40,8 +40,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        title="Software engineer in Windhoek."
-        description="I build web systems, automations and machine-learning tools, with a focus on work that replaces manual process."
+        title="Data analyst and software engineer in Windhoek."
+        description="I turn messy data and manual process into reports and systems that people can rely on."
       >
         <Button asChild size="lg">
           <Link href="/contact">
@@ -58,17 +58,19 @@ export default function AboutPage() {
         <div className="grid items-start gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
           <div className="space-y-5 text-lg leading-[1.6] text-graphite">
             <p>
-              I&apos;m a Computer Science Honours graduate from the University of Namibia. I work mostly in Python, C#,
-              Java and JavaScript, with Flask, Django, React and Next.js on the web side, and PostgreSQL and SQL Server for data.
+              I&apos;m a data analyst and software engineer at the Agricultural Bank of Namibia. Day to day I extract data from
+              SAP, SharePoint and legacy systems, load it into SQL, check its quality and turn it into Power BI reports that
+              Finance and executives present from.
             </p>
             <p>
-              In 2025 I interned as a software developer at the Agricultural Bank of Namibia. I built a user access
-              management system, automated internal processes with Power Automate and UiPath, and managed the
-              requirements for a website revamp.
+              I joined Agribank as a software development intern in February 2025. The internship was extended twice on
+              performance, and I moved into the graduate data analyst role in January 2026. Along the way I migrated millions
+              of legacy transactions into SQL, built Power Automate robots and wrote the requirements for the bank&apos;s
+              website revamp.
             </p>
             <p>
-              My honours thesis, AgriSense, applies computer vision to tomato disease detection for smallholder
-              farmers. I&apos;m now looking for a role where I can keep building systems that people use daily.
+              I hold a BSc (Honours) in Computer Science from the University of Namibia. My thesis, AgriSense, applies computer
+              vision to tomato disease detection for smallholder farmers.
             </p>
           </div>
           <div className="mx-auto w-full max-w-[420px]">
@@ -104,8 +106,9 @@ export default function AboutPage() {
           <div className="rounded-lg bg-lavender-mist p-8">
             <h3 className="text-2xl text-foreground">Research: AgriSense</h3>
             <p className="mt-3 text-base leading-[1.6] text-graphite">
-              A real-time crop monitoring and disease detection system for smallholder farmers in Namibia. It uses an
-              enhanced YOLOv8 model with CBAM attention and a BiRepGFPN feature pyramid, plus soil and weather data.
+              A real-time crop monitoring and disease detection system for smallholder farmers in Namibia. An enhanced
+              YOLOv8 model with CBAM attention and a BiRepGFPN feature pyramid reached 93.8% mAP50-95 and 92.2% accuracy
+              across 9 tomato leaf classes.
             </p>
             <Link
               href="/projects/agrisense"

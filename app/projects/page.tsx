@@ -10,7 +10,7 @@ import { projects, type Project } from "@/lib/projects"
 export const metadata: Metadata = {
   title: "Projects | Sein Muwana",
   description:
-    "AgriSense crop disease detection, RPA and user-access tooling built at Agribank, and websites for small businesses.",
+    "AgriSense crop disease detection, data and automation work at Agribank, and websites for small businesses.",
 }
 
 const featured = projects.find((p) => p.featured)!
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
     <>
       <PageHeader
         title="Projects"
-        description="A research thesis, internal tools from my time at a bank, and websites for small businesses."
+        description="A research thesis, data and automation work from Agribank, and websites for small businesses."
       />
 
       <Section>
@@ -53,7 +53,7 @@ export default function ProjectsPage() {
       {groups.map((group, i) => (
         <Section key={group} tone={i % 2 === 0 ? "fog" : "light"}>
           <h2 className="text-4xl text-foreground sm:text-[2.5rem]">
-            {group === "Agribank" ? "Built at Agribank" : "Websites"}
+            {group === "Agribank" ? "Data and automation at Agribank" : "Websites"}
           </h2>
           <ul className="mt-10 border-t border-border">
             {projects

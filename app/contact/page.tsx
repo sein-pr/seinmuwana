@@ -25,11 +25,11 @@ const channels = [
 const faqs = [
   {
     q: "What kind of work are you looking for?",
-    a: "Software development, process automation and applied AI. I've built user-access tooling and RPA bots at a bank, and my research is in crop disease detection.",
+    a: "Data analytics, ETL, process automation and applied AI. At Agribank I've built a finance dashboard, a client data clean-up and RPA robots, and my research is in crop disease detection.",
   },
   {
     q: "Do you work remotely?",
-    a: "Yes. I'm based in Windhoek and open to remote, hybrid or on-site roles.",
+    a: "I'm based in Windhoek and open to remote, hybrid or on-site roles.",
   },
   {
     q: "What's the quickest way to reach you?",

@@ -47,7 +47,14 @@ export default async function CertificationDetailPage({ params }: { params: Para
           <p className="mt-4 text-lg text-white/75">
             {certification.issuer} · <span className="tabular">{issued}</span>
           </p>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
+            {certification.verifyUrl && (
+              <Button asChild size="lg">
+                <a href={certification.verifyUrl} target="_blank" rel="noopener noreferrer">
+                  Verify with {certification.issuer}
+                </a>
+              </Button>
+            )}
             <Button asChild size="lg" variant="secondary">
               <Link href={`/certifications/${certification.slug}/view`}>View credential summary</Link>
             </Button>
@@ -72,10 +79,12 @@ export default async function CertificationDetailPage({ params }: { params: Para
               <dt className="text-muted-foreground">Level</dt>
               <dd className="text-right text-foreground">{certification.level}</dd>
             </div>
-            <div className="flex justify-between gap-4 py-4">
-              <dt className="text-muted-foreground">Credential ID</dt>
-              <dd className="tabular break-all text-right text-foreground">{certification.credentialId}</dd>
-            </div>
+            {certification.credentialId && (
+              <div className="flex justify-between gap-4 py-4">
+                <dt className="text-muted-foreground">Credential ID</dt>
+                <dd className="tabular break-all text-right text-foreground">{certification.credentialId}</dd>
+              </div>
+            )}
           </dl>
         </div>
       </Section>

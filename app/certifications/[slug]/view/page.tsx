@@ -53,18 +53,29 @@ export default async function CertificateViewPage({ params }: { params: Params }
               <dt className="text-muted-foreground">Issued</dt>
               <dd className="tabular text-right text-foreground">{issued}</dd>
             </div>
-            <div className="flex justify-between gap-4 py-4">
-              <dt className="text-muted-foreground">Credential ID</dt>
-              <dd className="tabular break-all text-right text-foreground">{certification.credentialId}</dd>
-            </div>
+            {certification.credentialId && (
+              <div className="flex justify-between gap-4 py-4">
+                <dt className="text-muted-foreground">Credential ID</dt>
+                <dd className="tabular break-all text-right text-foreground">{certification.credentialId}</dd>
+              </div>
+            )}
           </dl>
 
           <p className="mt-8 text-base leading-[1.6] text-graphite">{certification.fullDescription}</p>
           <p className="mt-4 text-sm text-muted-foreground">{certification.skills.join(" · ")}</p>
 
           <p className="mt-10 border-t border-border pt-6 text-sm leading-[1.6] text-muted-foreground">
-            This is a summary of the credential, not the certificate itself. To verify it with the issuer, ask for the
-            link through the contact page.
+            This is a summary of the credential, not the certificate itself.{" "}
+            {certification.verifyUrl ? (
+              <>
+                Verify it with the issuer:{" "}
+                <a href={certification.verifyUrl} className="break-all text-foreground underline underline-offset-4">
+                  {certification.verifyUrl}
+                </a>
+              </>
+            ) : (
+              "To verify it with the issuer, ask for the link through the contact page."
+            )}
           </p>
         </article>
       </div>

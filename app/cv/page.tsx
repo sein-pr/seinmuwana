@@ -62,7 +62,7 @@ export default function CVPage() {
                 {cv.skills.map((skill) => (
                   <div key={skill.label}>
                     <dt className="text-sm font-semibold text-foreground">{skill.label}</dt>
-                    <dd className="mt-0.5 text-sm leading-[1.5] text-graphite">{skill.value}</dd>
+                    <dd className="mt-0.5 text-sm leading-[1.5] text-graphite">{skill.items.join(", ")}</dd>
                   </div>
                 ))}
               </dl>

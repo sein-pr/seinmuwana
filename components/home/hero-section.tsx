@@ -8,8 +8,8 @@ import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { SplitHeading } from "@/components/motion/split-heading"
 
-const tags = ["Full-stack", "Automation (RPA)", "Computer vision", "Testing and QA"]
-const workedWith = ["Agribank", "University of Namibia", "Power Automate", "UiPath", "Neo4j"]
+const tags = ["Data and ETL", "Power BI", "Automation (RPA)", "Computer vision"]
+const workedWith = ["Agribank", "University of Namibia", "Power BI", "Power Automate", "Microsoft Fabric", "SAP"]
 
 /** A checkbox that ticks itself after a delay. */
 function TickBox({ delay }: { delay: number }) {
@@ -57,8 +57,8 @@ export function HeroSection() {
             className="text-[2.75rem] leading-[1.05] text-white sm:text-6xl lg:text-[4.5rem]"
           />
           <motion.p {...rise(0.55)} className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
-            I&apos;m Sein Muwana, a software engineer in Windhoek. I build web systems, RPA bots and computer-vision tools
-            that replace manual process, and I&apos;ve shipped them inside a bank.
+            I&apos;m Sein Muwana, a data analyst and software engineer at Agribank in Windhoek. I turn messy data and
+            manual process into reports, pipelines and robots that people rely on.
           </motion.p>
 
           <ul className="mt-8 flex flex-wrap gap-2">

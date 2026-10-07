@@ -23,24 +23,24 @@ export function registerCvFonts(origin: string) {
 }
 
 const s = StyleSheet.create({
-  page: { fontFamily: "Inter", fontSize: 9, lineHeight: 1.4, color: INK, paddingTop: 34, paddingBottom: 28, paddingHorizontal: 44 },
+  page: { fontFamily: "Inter", fontSize: 9, lineHeight: 1.4, color: INK, paddingTop: 36, paddingBottom: 30, paddingHorizontal: 44 },
   header: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end", paddingBottom: 12, borderBottomWidth: 2, borderBottomColor: VIOLET },
   name: { fontSize: 28, fontWeight: 800, letterSpacing: -0.6, lineHeight: 1.05 },
   role: { fontSize: 11, color: MUTED, marginTop: 4 },
   contact: { alignItems: "flex-end", fontSize: 8.5, color: MUTED, lineHeight: 1.55 },
   link: { color: MUTED, textDecoration: "none" },
-  section: { marginTop: 11 },
+  section: { marginTop: 12 },
   h2: { fontSize: 8.5, fontWeight: 800, letterSpacing: 1.2, textTransform: "uppercase", color: INK, marginBottom: 6, paddingBottom: 3, borderBottomWidth: 0.75, borderBottomColor: RULE },
   row: { flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" },
   title: { fontSize: 10, fontWeight: 600 },
   period: { fontSize: 8.5, color: MUTED },
   org: { fontSize: 9, color: MUTED, marginBottom: 3 },
-  item: { marginBottom: 6 },
+  item: { marginBottom: 7 },
   bullet: { flexDirection: "row", marginBottom: 2 },
   dot: { width: 9, color: MUTED },
   bulletText: { flex: 1 },
   skillRow: { flexDirection: "row", marginBottom: 3 },
-  skillLabel: { width: 62, fontWeight: 600 },
+  skillLabel: { width: 84, fontWeight: 600 },
   skillValue: { flex: 1 },
   two: { flexDirection: "row", gap: 24 },
   col: { flex: 1 },
@@ -89,7 +89,7 @@ export function CvDocument({ cv }: { cv: CV }) {
           ))}
         </View>
 
-        <View style={s.section}>
+        <View style={s.section} break>
           <Text style={s.h2}>Education</Text>
           {cv.education.map((e) => (
             <View key={e.title} style={s.item} wrap={false}>
@@ -97,8 +97,7 @@ export function CvDocument({ cv }: { cv: CV }) {
                 <Text style={s.title}>{e.title}</Text>
                 <Text style={s.period}>{e.period}</Text>
               </View>
-              <Text style={s.org}>{e.org}</Text>
-              <Text>{e.note}</Text>
+              <Text style={s.org}>{`${e.org}  ·  ${e.note}`}</Text>
             </View>
           ))}
         </View>
@@ -108,7 +107,7 @@ export function CvDocument({ cv }: { cv: CV }) {
           {cv.skills.map((k) => (
             <View key={k.label} style={s.skillRow}>
               <Text style={s.skillLabel}>{k.label}</Text>
-              <Text style={s.skillValue}>{k.value}</Text>
+              <Text style={s.skillValue}>{k.items.join(", ")}</Text>
             </View>
           ))}
         </View>
