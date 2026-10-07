@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProfileSlider } from "@/components/profile-slider"
+import { RevealMask } from "@/components/motion/reveal-mask"
 import { PageHeader } from "@/components/layout/page-header"
 import { Section, SectionHeading } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
@@ -73,9 +74,9 @@ export default function AboutPage() {
               vision to tomato disease detection for smallholder farmers.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-[420px]">
+          <RevealMask className="mx-auto w-full max-w-[420px]">
             <ProfileSlider />
-          </div>
+          </RevealMask>
         </div>
       </Section>
 

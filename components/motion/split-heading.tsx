@@ -1,6 +1,7 @@
 "use client"
 
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion"
 
 interface SplitHeadingProps {
   text: string
@@ -14,7 +15,7 @@ interface SplitHeadingProps {
 
 /** Words slide up out of a mask, one after another. Plain text when reduced motion is on. */
 export function SplitHeading({ text, as = "h2", className, delay = 0, inView = false }: SplitHeadingProps) {
-  const reduce = useReducedMotion()
+  const reduce = usePrefersReducedMotion()
   const Tag = motion[as]
   const words = text.split(" ")
 

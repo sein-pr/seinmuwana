@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
+import { motion, useMotionTemplate, useMotionValue, useScroll, useTransform } from "motion/react"
+import { usePrefersReducedMotion as useReducedMotion } from "@/lib/use-reduced-motion"
 import { ArrowRight } from "lucide-react"
 import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { SplitHeading } from "@/components/motion/split-heading"
+import { Magnetic } from "@/components/motion/magnetic"
 
 const tags = ["Data and ETL", "Power BI", "Automation (RPA)", "Computer vision", "Microsoft Fabric"]
 const workedWith = ["Agribank", "University of Namibia", "Power BI", "Power Automate", "Microsoft Fabric", "SAP"]
@@ -35,7 +37,15 @@ export function HeroSection() {
   const reduce = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
-  const personY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 70])
+  const personY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 90])
+  const slatsY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, 40])
+  const copyY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [0, -60])
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], reduce ? [1, 1] : [1, 0.2])
+
+  // A violet light that follows the pointer across the backdrop.
+  const mx = useMotionValue(78)
+  const my = useMotionValue(40)
+  const spotlight = useMotionTemplate`radial-gradient(520px circle at ${mx}% ${my}%, rgba(150,113,255,0.20), transparent 62%)`
 
   const rise = (delay: number) =>
     reduce
@@ -50,6 +60,12 @@ export function HeroSection() {
     <section
       ref={ref}
       className="relative isolate -mt-16 flex min-h-svh flex-col overflow-hidden bg-[#120e0c] text-white"
+      onPointerMove={(e) => {
+        if (reduce || e.pointerType !== "mouse") return
+        const r = e.currentTarget.getBoundingClientRect()
+        mx.set(((e.clientX - r.left) / r.width) * 100)
+        my.set(((e.clientY - r.top) / r.height) * 100)
+      }}
     >
       {/* Warm studio backdrop: lamp glow bottom right, soft panel slats. */}
       <div
@@ -60,10 +76,12 @@ export function HeroSection() {
             "radial-gradient(55% 45% at 86% 92%, rgba(222,128,44,0.38), transparent 62%), radial-gradient(45% 55% at 78% 30%, rgba(120,90,70,0.35), transparent 70%), linear-gradient(115deg, #15100d 0%, #251b15 48%, #1a130f 100%)",
         }}
       />
-      <div
+      <motion.div aria-hidden="true" className="absolute inset-0 -z-20" style={{ backgroundImage: spotlight }} />
+      <motion.div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 opacity-60"
+        className="absolute -inset-y-10 inset-x-0 -z-20 opacity-60"
         style={{
+          y: slatsY,
           backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 2px, transparent 2px 72px)",
           maskImage: "linear-gradient(to right, transparent 25%, black 75%)",
           WebkitMaskImage: "linear-gradient(to right, transparent 25%, black 75%)",
@@ -88,11 +106,23 @@ export function HeroSection() {
         />
       </motion.div>
 
+      {/* Film grain keeps the dark gradients from banding and adds some texture. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-[4] opacity-[0.09] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+        }}
+      />
+
       {/* Keeps the copy legible over the backdrop. */}
       <div aria-hidden="true" className="absolute inset-0 -z-[5] bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:via-black/30" />
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-[5] hidden h-2/5 bg-gradient-to-t from-black/70 to-transparent lg:block" />
 
-      <div className="relative mx-auto flex w-full max-w-[1200px] flex-1 flex-col justify-between px-6 pb-[19rem] pt-24 sm:pb-[30rem] sm:pt-28 lg:pb-8">
+      <motion.div
+        style={{ y: copyY, opacity: copyOpacity }}
+        className="relative mx-auto flex w-full max-w-[1200px] flex-1 flex-col justify-between px-6 pb-[19rem] pt-24 sm:pb-[30rem] sm:pt-28 lg:pb-8">
         <div className="max-w-[40rem]">
           <SplitHeading
             as="h1"
@@ -119,12 +149,14 @@ export function HeroSection() {
           </ul>
 
           <motion.div {...rise(1.0)} className="mt-8">
-            <Button asChild size="lg" className="h-14 px-9 text-lg">
-              <Link href="/contact">
-                Contact me
-                <ArrowRight />
-              </Link>
-            </Button>
+            <Magnetic>
+              <Button asChild size="lg" className="group h-14 px-9 text-lg">
+                <Link href="/contact" data-cursor="Hi">
+                  Contact me
+                  <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" />
+                </Link>
+              </Button>
+            </Magnetic>
             <p className="mt-3 text-xs text-white/80">*Open to full-time roles, freelance work and collaborations.</p>
           </motion.div>
         </div>
@@ -137,7 +169,7 @@ export function HeroSection() {
             ))}
           </ul>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }

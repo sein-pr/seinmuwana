@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/layout/page-header"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { AnimatedSection } from "@/components/ui/animated-section"
 import { certifications } from "@/lib/certifications"
+import { DrawLine } from "@/components/motion/draw-line"
 
 export const metadata: Metadata = {
   title: "Certifications | Sein Muwana",
@@ -27,7 +28,8 @@ export default function CertificationsPage() {
         <ul className="border-t border-border">
           {certifications.map((certification, index) => (
             <AnimatedSection key={certification.slug} animation="fade-up" delay={Math.min(index, 4) * 50}>
-              <li className="grid gap-4 border-b border-border py-8 md:grid-cols-[200px_1fr_auto] md:gap-12">
+              <li className="group relative grid gap-4 py-8 transition-colors hover:bg-fog md:grid-cols-[200px_1fr_auto] md:gap-12 md:px-3">
+                <DrawLine />
                 <p className="tabular text-sm text-muted-foreground md:pt-1.5">{formatDate(certification.issueDate)}</p>
                 <div>
                   <h2 className="text-2xl text-foreground">

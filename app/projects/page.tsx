@@ -6,6 +6,7 @@ import { Section } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 import { AnimatedSection } from "@/components/ui/animated-section"
 import { projects, type Project } from "@/lib/projects"
+import { DrawLine } from "@/components/motion/draw-line"
 
 export const metadata: Metadata = {
   title: "Projects | Sein Muwana",
@@ -59,10 +60,12 @@ export default function ProjectsPage() {
             {projects
               .filter((p) => p.group === group)
               .map((project) => (
-                <li key={project.slug} className="border-b border-border">
+                <li key={project.slug} className="relative">
+                  <DrawLine />
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="group grid gap-2 py-6 md:grid-cols-[1fr_1.4fr_auto] md:items-baseline md:gap-10"
+                    data-cursor="Open"
+                    className="group grid gap-2 py-6 transition-[padding,background-color] duration-300 hover:bg-background md:grid-cols-[1fr_1.4fr_auto] md:items-baseline md:gap-10 md:hover:pl-4"
                   >
                     <div>
                       <h3 className="text-xl text-foreground group-hover:underline group-hover:underline-offset-4">

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 import { Menu, Search, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -76,13 +77,20 @@ export function Header() {
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
-                "flex h-full items-center border-b-2 text-base font-medium transition-colors",
-                isActive(item.href)
-                  ? "border-white text-white"
-                  : "border-transparent text-white/70 hover:text-white",
+                "group relative flex h-full items-center text-base font-medium transition-colors",
+                isActive(item.href) ? "text-white" : "text-white/70 hover:text-white",
               )}
             >
               {item.name}
+              {isActive(item.href) ? (
+                <motion.span
+                  layoutId="nav-underline"
+                  className="absolute inset-x-0 bottom-0 h-0.5 bg-white"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
+              ) : (
+                <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-white/50 transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none" />
+              )}
             </Link>
           ))}
         </div>
