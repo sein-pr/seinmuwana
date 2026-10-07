@@ -8,7 +8,6 @@ const BACK4APP_CONFIG = {
 
 export async function downloadCVFromBack4App() {
   try {
-    console.log('Fetching CV from Back4App...')
     
     // Fetch the File object from Back4App
     const response = await fetch(`${BACK4APP_CONFIG.apiUrl}/classes/File`, {
@@ -19,17 +18,12 @@ export async function downloadCVFromBack4App() {
         'Content-Type': 'application/json'
       }
     })
-
-    console.log('Response status:', response.status)
     
     if (!response.ok) {
-      const errorText = await response.text()
-      console.error('Back4App error response:', errorText)
-      throw new Error(`Failed to fetch CV from Back4App: ${response.status} ${errorText}`)
+      throw new Error(`Failed to fetch CV from Back4App: ${response.status}`)
     }
 
     const data = await response.json()
-    console.log('Back4App response data:', data)
     
     // Get the first file object (or you can filter by specific criteria)
     if (!data.results || data.results.length === 0) {
@@ -37,7 +31,6 @@ export async function downloadCVFromBack4App() {
     }
 
     const fileObject = data.results[0]
-    console.log('File object:', fileObject)
     
     // Get the resume file URL from the 'resume' column
     if (!fileObject.resume || !fileObject.resume.url) {
@@ -45,7 +38,6 @@ export async function downloadCVFromBack4App() {
     }
 
     const fileUrl = fileObject.resume.url
-    console.log('Downloading from URL:', fileUrl)
 
     // Fetch the actual PDF file
     const fileResponse = await fetch(fileUrl)
@@ -56,7 +48,6 @@ export async function downloadCVFromBack4App() {
 
     // Get the blob
     const blob = await fileResponse.blob()
-    console.log('Downloaded blob size:', blob.size)
 
     // Create a download link and trigger download
     const downloadUrl = window.URL.createObjectURL(blob)
@@ -69,11 +60,8 @@ export async function downloadCVFromBack4App() {
     
     // Clean up the URL object
     window.URL.revokeObjectURL(downloadUrl)
-    
-    console.log('Download completed successfully')
 
   } catch (error) {
-    console.error('Error downloading CV:', error)
     throw error
   }
 }

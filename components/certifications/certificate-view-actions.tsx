@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Download, Printer } from "lucide-react"
+import { Printer } from "lucide-react"
 
 export function CertificateViewActions() {
   useEffect(() => {
@@ -18,13 +18,10 @@ export function CertificateViewActions() {
   return (
     <Button
       onClick={() => window.print()}
-      className="gap-2"
       size="sm"
-      aria-label="Download or print certificate"
     >
-      <Download className="h-4 w-4" />
-      <Printer className="h-4 w-4" />
-      Download / Print
+      <Printer aria-hidden="true" />
+      Print or save as PDF
     </Button>
   )
 }

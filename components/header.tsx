@@ -41,7 +41,7 @@ export function Header() {
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href))
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-carbon text-white">
+    <header className="print:hidden sticky top-0 z-50 w-full border-b border-white/10 bg-carbon text-white">
       <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
         <Link href="/" className="flex min-h-11 items-center gap-2.5">
           <Image

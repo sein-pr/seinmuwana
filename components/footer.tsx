@@ -7,6 +7,8 @@ const navigation = {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Experience", href: "/experience" },
+    { name: "Skills", href: "/skills" },
+    { name: "Education", href: "/education" },
     { name: "Certifications", href: "/certifications" },
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
@@ -33,7 +35,7 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="print:hidden border-t border-border bg-background">
       <div className="mx-auto max-w-[1200px] px-6 py-12">
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}

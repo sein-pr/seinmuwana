@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
-import { HeroImageSlider } from "./hero-image-slider"
+import { ProfileSlider } from "@/components/profile-slider"
 
 const tags = ["Full-Stack", "AI & Machine Learning", "Process Automation", "Quality Assurance"]
 
@@ -34,16 +34,16 @@ export function HeroSection() {
   return (
     <section className="bg-midnight text-white">
       <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-24">
-        <div>
+        <div className="motion-safe:[&>*]:animate-rise">
           <h1 className="text-[2.75rem] leading-[1.05] text-white sm:text-6xl lg:text-[4.5rem]">
             Software that removes the busywork.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
+          <p style={{ "--delay": "80ms" } as React.CSSProperties} className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
             I&apos;m Sein Muwana, a software engineer in Windhoek. I build full-stack systems, AI tools and RPA bots in
             C#, Java and Python, and I&apos;ve shipped them inside a bank.
           </p>
 
-          <ul className="mt-8 flex flex-wrap gap-2">
+          <ul style={{ "--delay": "160ms" } as React.CSSProperties} className="mt-8 flex flex-wrap gap-2">
             {tags.map((tag) => (
               <li
                 key={tag}
@@ -54,7 +54,7 @@ export function HeroSection() {
             ))}
           </ul>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div style={{ "--delay": "240ms" } as React.CSSProperties} className="mt-10 flex flex-wrap items-center gap-3">
             <Button asChild size="lg">
               <Link href="/contact">
                 Contact me
@@ -71,7 +71,7 @@ export function HeroSection() {
             </Button>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
+          <div style={{ "--delay": "320ms" } as React.CSSProperties} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
             <div className="flex items-center gap-4">
               <a
                 href={stats?.githubUrl ?? "https://github.com/sein-pr"}
@@ -100,7 +100,7 @@ export function HeroSection() {
         </div>
 
         <div className="mx-auto w-full max-w-[380px] lg:ml-auto">
-          <HeroImageSlider />
+          <ProfileSlider />
           <p className="mt-4 text-sm text-white/70">
             Sein Muwana · BSc Computer Science (Honours), University of Namibia
           </p>

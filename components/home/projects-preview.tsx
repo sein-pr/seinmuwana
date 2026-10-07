@@ -5,33 +5,10 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { AnimatedSection } from "@/components/ui/animated-section"
 import { cn } from "@/lib/utils"
+import { getProjectBySlug } from "@/lib/projects"
 
-const projects = [
-  {
-    title: "AgriSense",
-    slug: "agrisense",
-    description:
-      "A crop and disease monitoring system built on affordable hardware. My honours research project, aimed at making AgriTech accessible to smaller farms.",
-    tags: ["Python", "Machine Learning", "IoT", "AgriTech"],
-    featured: true,
-  },
-  {
-    title: "Automation Bots",
-    slug: "automation-bots",
-    description:
-      "RPA solutions in Power Automate and UiPath that streamline internal processes and cut manual workload at Agribank.",
-    tags: ["Power Automate", "UiPath", "RPA"],
-    featured: false,
-  },
-  {
-    title: "User Access Application",
-    slug: "user-access-app",
-    description:
-      "An application that digitised manual data workflows and improved operational efficiency.",
-    tags: ["C#", "Full-Stack", "Database"],
-    featured: false,
-  },
-]
+const featuredSlugs = ["agrisense", "rpa-automation-suite", "user-access-management"]
+const projects = featuredSlugs.map((slug) => getProjectBySlug(slug)!)
 
 export function ProjectsPreview() {
   return (
@@ -84,7 +61,7 @@ export function ProjectsPreview() {
                       project.featured ? "max-w-lg text-lg" : "text-base",
                     )}
                   >
-                    {project.description}
+                    {project.summary}
                   </p>
                 </div>
                 <p className="mt-8 text-sm text-muted-foreground">{project.tags.join(" · ")}</p>

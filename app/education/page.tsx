@@ -1,229 +1,94 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, GraduationCap, BookOpen, Lightbulb, Award } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import { PageHeader } from "@/components/layout/page-header"
+import { Section } from "@/components/layout/section"
+import { ClosingBand } from "@/components/layout/closing-band"
 
 export const metadata: Metadata = {
   title: "Education | Sein Muwana",
-  description: "Academic background and research of Sein Muwana - Computer Science Honours student at the University of Namibia.",
+  description:
+    "BSc Computer Science Honours at the University of Namibia, with an honours thesis on crop disease detection.",
 }
 
-const education = [
-  {
-    degree: "Bachelor of Computer Science Honours",
-    institution: "University of Namibia",
-    period: "Graduating March 2026",
-    status: "In Progress",
-    description: "Pursuing advanced studies in computer science with a focus on artificial intelligence and agricultural technology applications.",
-    research: {
-      title: "AgriSense: A crop and disease monitoring system using affordable technology",
-      description: "My honours research project focuses on improving the agricultural sector in Namibia by introducing accessible and affordable AgriTech solutions. The system uses affordable sensors and AI to help farmers monitor crop health and detect diseases early.",
-      objectives: [
-        "Develop an affordable crop monitoring system using IoT sensors",
-        "Implement machine learning algorithms for disease detection",
-        "Create a user-friendly interface for farmers with varying technical backgrounds",
-        "Ensure the solution is accessible and sustainable in rural areas",
-      ],
-    },
-    highlights: [
-      "Focus on AI and Machine Learning applications",
-      "Research in Agricultural Technology (AgriTech)",
-      "Strong foundation in software engineering principles",
-      "Practical experience through internships",
-    ],
-  },
-  {
-    degree: "Grade 12 NSSCH Certificate",
-    institution: "Caprivi Senior Secondary School",
-    period: "Completed March 2020",
-    status: "Completed",
-    description: "Successfully completed secondary education with strong academic performance, laying the foundation for further studies in computer science.",
-    highlights: [
-      "Graduated with 37 points",
-      "Strong performance in Mathematics and Sciences",
-      "Developed early interest in technology and computing",
-    ],
-  },
-]
-
-const certifications = [
-  {
-    title: "Power Automate Training",
-    issuer: "Microsoft",
-    description: "Practical training in process automation using Microsoft Power Automate.",
-  },
-  {
-    title: "UIPath RPA Developer",
-    issuer: "UIPath",
-    description: "Training in Robotic Process Automation development.",
-  },
+const training = [
+  { title: "Power Automate training", issuer: "Microsoft", note: "Process automation with cloud flows." },
+  { title: "UiPath RPA developer training", issuer: "UiPath", note: "Building and running RPA bots." },
 ]
 
 export default function EducationPage() {
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="bg-card py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 
-              className="text-4xl font-bold text-foreground sm:text-5xl"
-            >
-              Education & Research
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              My academic journey has equipped me with strong theoretical foundations and 
-              practical skills in computer science, with a special focus on AI and AgriTech research.
-            </p>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHeader
+        title="Education"
+        description="A computer science degree at the University of Namibia, with an honours thesis in applied AI."
+      />
 
-      {/* Education Timeline */}
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="space-y-12">
-            {education.map((edu, index) => (
-              <div key={index} className="rounded-lg border border-border bg-card p-6 sm:p-8">
-                {/* Header */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
-                      <GraduationCap className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h2 
-                        className="text-xl font-bold text-card-foreground"
-                      >
-                        {edu.degree}
-                      </h2>
-                      <p className="text-muted-foreground font-medium">{edu.institution}</p>
-                      <p className="text-sm text-muted-foreground">{edu.period}</p>
-                    </div>
-                  </div>
-                  <Badge variant={edu.status === "In Progress" ? "default" : "secondary"}>
-                    {edu.status}
-                  </Badge>
-                </div>
-
-                {/* Description */}
-                <p className="mt-6 text-muted-foreground leading-relaxed">
-                  {edu.description}
+      <Section>
+        <ol className="border-t border-border">
+          <li className="grid gap-4 border-b border-border py-10 md:grid-cols-[200px_1fr] md:gap-12">
+            <p className="tabular text-sm text-muted-foreground md:pt-2">2021 – 2025</p>
+            <div>
+              <h2 className="text-3xl text-foreground">BSc Computer Science (Honours)</h2>
+              <p className="mt-1 text-base text-muted-foreground">University of Namibia</p>
+              <div className="mt-6 max-w-2xl rounded-lg bg-lavender-mist p-6">
+                <h3 className="text-lg text-foreground">Thesis: AgriSense</h3>
+                <p className="mt-2 text-base leading-[1.6] text-graphite">
+                  Developing a real-time crop monitoring and disease detection system. Supervised by Dr. Nalina Suresh,
+                  submitted October 2025.
                 </p>
-
-                {/* Research Section (if applicable) */}
-                {edu.research && (
-                  <div className="mt-8 rounded-lg bg-secondary/50 p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Lightbulb className="h-5 w-5 text-primary" />
-                      <h3 
-                        className="font-semibold text-foreground"
-                      >
-                        Research Project
-                      </h3>
-                    </div>
-                    <h4 className="font-medium text-foreground">{edu.research.title}</h4>
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                      {edu.research.description}
-                    </p>
-                    
-                    <div className="mt-4">
-                      <h5 className="text-sm font-medium text-foreground mb-2">Research Objectives:</h5>
-                      <ul className="space-y-1">
-                        {edu.research.objectives.map((obj, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <span className="text-muted-foreground">•</span>
-                            {obj}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <Button asChild variant="link" className="mt-4 h-auto p-0">
-                      <Link href="/projects">
-                        Learn more about AgriSense
-                        <ArrowRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
-                )}
-
-                {/* Highlights */}
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <BookOpen className="h-5 w-5 text-primary" />
-                    <h3 className="font-semibold text-card-foreground">Highlights</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {edu.highlights.map((highlight) => (
-                      <Badge key={highlight} variant="outline" className="text-xs">
-                        {highlight}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="bg-card py-16 sm:py-24">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 
-              className="text-3xl font-bold text-foreground sm:text-4xl"
-            >
-              Training & Certifications
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Additional training and certifications that complement my formal education.
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2">
-            {certifications.map((cert, index) => (
-              <div key={index} className="rounded-lg border border-border bg-background p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <Award className="h-5 w-5 text-primary" />
-                  <h3 className="font-semibold text-foreground">{cert.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground font-medium mb-2">{cert.issuer}</p>
-                <p className="text-sm text-muted-foreground">{cert.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 
-              className="text-3xl font-bold text-foreground sm:text-4xl"
-            >
-              Explore My Work
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              See how I apply my academic knowledge to real-world projects and solutions.
-            </p>
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button asChild size="lg" className="gap-2">
-                <Link href="/projects">
-                  View Projects
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-[1.55] text-graphite marker:text-smoke">
+                  <li>Enhanced YOLOv8 with CBAM attention and a BiRepGFPN feature pyramid.</li>
+                  <li>Detects tomato leaf diseases such as early blight and septoria.</li>
+                  <li>Combines detections with soil and weather API data for farmer-facing advice.</li>
+                  <li>IoT sensor support is planned as future work.</li>
+                </ul>
+                <Link
+                  href="/projects/agrisense"
+                  className="mt-5 inline-flex min-h-11 items-center gap-1.5 text-base font-medium text-foreground underline underline-offset-4"
+                >
+                  Project details
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="gap-2 bg-transparent">
-                <Link href="/cv">Download CV</Link>
-              </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-    </div>
+          </li>
+          <li className="grid gap-4 border-b border-border py-10 md:grid-cols-[200px_1fr] md:gap-12">
+            <p className="tabular text-sm text-muted-foreground md:pt-2">2019 – 2020</p>
+            <div>
+              <h2 className="text-3xl text-foreground">NSSCH Certificate, Grade 12</h2>
+              <p className="mt-1 text-base text-muted-foreground">Caprivi Senior Secondary School</p>
+              <p className="mt-5 text-base text-graphite">37 points.</p>
+            </div>
+          </li>
+        </ol>
+      </Section>
+
+      <Section tone="fog">
+        <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Training</h2>
+        <ul className="mt-8 border-t border-border bg-fog">
+          {training.map((item) => (
+            <li key={item.title} className="grid gap-1 border-b border-border py-5 md:grid-cols-[1fr_200px_1.2fr] md:gap-8">
+              <p className="text-lg font-semibold text-foreground">{item.title}</p>
+              <p className="text-base text-muted-foreground">{item.issuer}</p>
+              <p className="text-base text-graphite">{item.note}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-base text-graphite">
+          More credentials are on the{" "}
+          <Link href="/certifications" className="text-foreground underline underline-offset-4">
+            certifications page
+          </Link>
+          .
+        </p>
+      </Section>
+
+      <ClosingBand
+        title="See the thesis in practice"
+        primary={{ label: "View AgriSense", href: "/projects/agrisense" }}
+        secondary={{ label: "View CV", href: "/cv" }}
+      />
+    </>
   )
 }
