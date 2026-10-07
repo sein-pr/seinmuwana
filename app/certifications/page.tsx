@@ -17,12 +17,8 @@ export default function CertificationsPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">
-              Credentials
-            </Badge>
             <h1
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Certifications
             </h1>
@@ -39,24 +35,22 @@ export default function CertificationsPage() {
             {certifications.map((certification) => (
               <article
                 key={certification.slug}
-                className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-xl"
+                className="group relative h-full overflow-hidden rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/50"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary/80 via-primary to-accent/80" />
 
                 <div className="mb-5 flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary text-foreground">
                     <Award className="h-6 w-6" />
                   </div>
                   <Badge variant="secondary">{certification.level}</Badge>
                 </div>
 
                 <h2
-                  className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors"
-                  style={{ fontFamily: "var(--font-heading)" }}
+                  className="text-lg font-bold text-card-foreground group-hover:text-foreground transition-colors"
                 >
                   {certification.title}
                 </h2>
-                <p className="text-sm font-medium text-primary">{certification.issuer}</p>
+                <p className="text-sm font-medium text-muted-foreground">{certification.issuer}</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   Issued {new Date(certification.issueDate).toLocaleDateString("en-US", {
                     month: "long",

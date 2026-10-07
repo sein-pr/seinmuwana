@@ -27,14 +27,13 @@ export default async function CertificateViewPage({ params }: { params: Params }
           <CertificateViewActions />
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-card p-8 shadow-xl sm:p-12 print:shadow-none">
-          <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-primary via-accent to-primary" />
+        <div className="relative overflow-hidden rounded-lg border border-primary/20 bg-card p-8 sm:p-12 print:shadow-none">
+          <div className="absolute inset-x-0 top-0 h-2 bg-primary" />
 
           <div className="text-center">
             <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">Certificate of Achievement</p>
             <h1
               className="mt-4 text-3xl font-bold text-foreground sm:text-5xl"
-              style={{ fontFamily: "var(--font-heading)" }}
             >
               {certification.title}
             </h1>
@@ -44,15 +43,15 @@ export default async function CertificateViewPage({ params }: { params: Params }
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl border border-border bg-background p-5 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="rounded-lg border border-border bg-background p-5 text-center">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                 <Award className="h-5 w-5" />
               </div>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">Issuer</p>
               <p className="mt-1 font-semibold text-foreground">{certification.issuer}</p>
             </div>
-            <div className="rounded-xl border border-border bg-background p-5 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="rounded-lg border border-border bg-background p-5 text-center">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                 <Calendar className="h-5 w-5" />
               </div>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">Issue Date</p>
@@ -60,8 +59,8 @@ export default async function CertificateViewPage({ params }: { params: Params }
                 {new Date(certification.issueDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
               </p>
             </div>
-            <div className="rounded-xl border border-border bg-background p-5 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="rounded-lg border border-border bg-background p-5 text-center">
+              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                 <FileCheck2 className="h-5 w-5" />
               </div>
               <p className="text-xs uppercase tracking-wide text-muted-foreground">Credential ID</p>

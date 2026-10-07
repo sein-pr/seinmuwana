@@ -52,10 +52,8 @@ export default function ExperiencePage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Career Journey</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Professional Experience
             </h1>
@@ -81,21 +79,20 @@ export default function ExperiencePage() {
                   <div className="absolute left-8 -translate-x-1/2 hidden sm:flex h-4 w-4 items-center justify-center rounded-full bg-primary" />
                   
                   <div className="sm:pl-20">
-                    <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 transition-all hover:border-primary/50 hover:shadow-lg">
+                    <div className="rounded-lg border border-border bg-card p-6 sm:p-8 transition-all hover:border-primary/50">
                       {/* Header */}
                       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div className="flex items-start gap-4">
-                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
                             <exp.icon className="h-6 w-6" />
                           </div>
                           <div>
                             <h2 
                               className="text-xl font-bold text-card-foreground"
-                              style={{ fontFamily: 'var(--font-heading)' }}
                             >
                               {exp.title}
                             </h2>
-                            <p className="text-primary font-medium">{exp.company}</p>
+                            <p className="text-muted-foreground font-medium">{exp.company}</p>
                             <p className="text-sm text-muted-foreground">{exp.location}</p>
                           </div>
                         </div>
@@ -151,8 +148,7 @@ export default function ExperiencePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               View My Full CV
             </h2>

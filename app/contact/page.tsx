@@ -73,10 +73,8 @@ export default function ContactPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Contact</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Get in Touch
             </h1>
@@ -96,7 +94,6 @@ export default function ContactPage() {
             <div>
               <h2 
                 className="text-2xl font-bold text-foreground"
-                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Contact Information
               </h2>
@@ -108,7 +105,7 @@ export default function ContactPage() {
               <div className="mt-8 space-y-6">
                 {contactInfo.map((item) => (
                   <div key={item.label} className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
                       <item.icon className="h-5 w-5" />
                     </div>
                     <div>
@@ -118,7 +115,7 @@ export default function ContactPage() {
                           href={item.href}
                           target={item.href.startsWith("http") ? "_blank" : undefined}
                           rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          className="text-muted-foreground hover:text-primary transition-colors"
+                          className="text-muted-foreground hover:text-foreground transition-colors"
                         >
                           {item.value}
                         </a>
@@ -131,9 +128,9 @@ export default function ContactPage() {
               </div>
 
               {/* Availability */}
-              <div className="mt-12 rounded-2xl border border-border bg-card p-6">
+              <div className="mt-12 rounded-lg border border-border bg-card p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-3 w-3 rounded-full bg-green-500 animate-pulse" />
+                  <div className="flex h-3 w-3 rounded-full bg-primary" />
                   <span className="font-medium text-foreground">Available for Work</span>
                 </div>
                 <p className="text-sm text-muted-foreground">
@@ -148,10 +145,9 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Form */}
-            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+            <div className="rounded-lg border border-border bg-card p-6 sm:p-8">
               <h2 
                 className="text-2xl font-bold text-card-foreground"
-                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Send a Message
               </h2>
@@ -161,7 +157,7 @@ export default function ContactPage() {
 
               {isSubmitted ? (
                 <div className="mt-8 text-center py-12">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-primary mb-4">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
                   <h3 className="text-lg font-semibold text-foreground">Message Sent!</h3>
@@ -257,13 +253,12 @@ export default function ContactPage() {
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <h2 
             className="text-2xl font-bold text-foreground text-center mb-12"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Frequently Asked Questions
           </h2>
           
           <div className="space-y-6">
-            <div className="rounded-xl border border-border bg-background p-6">
+            <div className="rounded-lg border border-border bg-background p-6">
               <h3 className="font-semibold text-foreground">What types of projects are you interested in?</h3>
               <p className="mt-2 text-muted-foreground">
                 I&apos;m interested in software development projects, automation solutions, AI/ML implementations, 
@@ -271,7 +266,7 @@ export default function ContactPage() {
               </p>
             </div>
             
-            <div className="rounded-xl border border-border bg-background p-6">
+            <div className="rounded-lg border border-border bg-background p-6">
               <h3 className="font-semibold text-foreground">Are you available for remote work?</h3>
               <p className="mt-2 text-muted-foreground">
                 Yes, I&apos;m open to both remote and on-site opportunities. I have experience working 
@@ -279,7 +274,7 @@ export default function ContactPage() {
               </p>
             </div>
             
-            <div className="rounded-xl border border-border bg-background p-6">
+            <div className="rounded-lg border border-border bg-background p-6">
               <h3 className="font-semibold text-foreground">What is your typical response time?</h3>
               <p className="mt-2 text-muted-foreground">
                 I typically respond to inquiries within 24-48 hours. For urgent matters, 

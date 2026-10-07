@@ -250,7 +250,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
           </Button>
           
           <div className="flex items-start gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-secondary text-foreground">
               <IconComponent className="h-8 w-8" />
             </div>
             <div className="flex-1">
@@ -260,12 +260,11 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 </Badge>
               </div>
               <h1 
-                className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="text-3xl font-bold text-foreground sm:text-4xl"
               >
                 {project.title}
               </h1>
-              <p className="mt-1 text-lg text-primary font-medium">{project.subtitle}</p>
+              <p className="mt-1 text-lg text-muted-foreground font-medium">{project.subtitle}</p>
             </div>
           </div>
           
@@ -310,14 +309,13 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="rounded-lg border border-border bg-card p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-destructive/10 text-destructive">
                   <Target className="h-5 w-5" />
                 </div>
                 <h2 
                   className="text-xl font-bold text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   The Challenge
                 </h2>
@@ -327,14 +325,13 @@ export default async function ProjectPage({ params }: { params: Params }) {
               </p>
             </div>
             
-            <div className="rounded-2xl border border-border bg-card p-6">
+            <div className="rounded-lg border border-border bg-card p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                   <Lightbulb className="h-5 w-5" />
                 </div>
                 <h2 
                   className="text-xl font-bold text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   The Solution
                 </h2>
@@ -352,13 +349,12 @@ export default async function ProjectPage({ params }: { params: Params }) {
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <h2 
             className="text-2xl font-bold text-foreground mb-6"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Key Objectives
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {project.objectives.map((objective, i) => (
-              <div key={i} className="flex items-start gap-3 rounded-xl bg-background p-4 border border-border">
+              <div key={i} className="flex items-start gap-3 rounded-lg bg-background p-4 border border-border">
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-primary mt-0.5" />
                 <span className="text-foreground">{objective}</span>
               </div>
@@ -374,7 +370,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <div>
               <h2 
                 className="text-2xl font-bold text-foreground mb-6"
-                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Technologies Used
               </h2>
@@ -393,11 +388,10 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <div>
               <h2 
                 className="text-2xl font-bold text-foreground mb-6"
-                style={{ fontFamily: 'var(--font-heading)' }}
               >
                 Impact
               </h2>
-              <div className="rounded-xl bg-primary/5 border border-primary/20 p-6">
+              <div className="rounded-lg bg-primary/5 border border-primary/20 p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Zap className="h-5 w-5 text-primary" />
                   <span className="font-semibold text-foreground">Project Impact</span>
@@ -416,7 +410,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 
             className="text-2xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Interested in This Project?
           </h2>

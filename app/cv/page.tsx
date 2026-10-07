@@ -126,14 +126,12 @@ export default function CVPage() {
         {/* Header */}
         <div className="flex flex-col gap-6 border-b border-border pb-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <Badge variant="secondary" className="mb-4">Curriculum Vitae</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Sein M Muwana
             </h1>
-            <p className="mt-2 text-xl text-primary font-medium">Software Engineer</p>
+            <p className="mt-2 text-xl text-muted-foreground font-medium">Software Engineer</p>
             
             <div className="mt-6 space-y-2 text-muted-foreground">
               <div className="flex items-center gap-2">
@@ -146,7 +144,7 @@ export default function CVPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:seinprince2@gmail.com" className="hover:text-primary">
+                <a href="mailto:seinprince2@gmail.com" className="hover:text-foreground">
                   seinprince2@gmail.com
                 </a>
               </div>
@@ -156,7 +154,7 @@ export default function CVPage() {
                   href="https://seinmuwana.netlify.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-primary"
+                  className="hover:text-foreground"
                 >
                   seinmuwana.netlify.app
                 </a>
@@ -167,7 +165,7 @@ export default function CVPage() {
                   href="https://www.linkedin.com/in/sein-muwana-2ab319299/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-primary"
+                  className="hover:text-foreground"
                 >
                   linkedin.com/in/sein-muwana
                 </a>
@@ -190,7 +188,6 @@ export default function CVPage() {
         <section className="border-b border-border py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <Award className="h-5 w-5 text-primary" />
             Professional Summary
@@ -208,7 +205,6 @@ export default function CVPage() {
         <section className="border-b border-border py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <Briefcase className="h-5 w-5 text-primary" />
             Work Experience
@@ -221,7 +217,7 @@ export default function CVPage() {
                   <h3 className="font-semibold text-foreground">{job.title}</h3>
                   <span className="text-sm text-muted-foreground">{job.period}</span>
                 </div>
-                <p className="text-primary font-medium">{job.company}</p>
+                <p className="text-muted-foreground font-medium">{job.company}</p>
                 <ul className="mt-3 space-y-2">
                   {job.responsibilities.map((item, i) => (
                     <li key={i} className="text-sm text-muted-foreground leading-relaxed">
@@ -238,7 +234,6 @@ export default function CVPage() {
         <section className="border-b border-border py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <GraduationCap className="h-5 w-5 text-primary" />
             Education
@@ -251,7 +246,7 @@ export default function CVPage() {
                   <h3 className="font-semibold text-foreground">{edu.degree}</h3>
                   <span className="text-sm text-muted-foreground">{edu.period}</span>
                 </div>
-                <p className="text-primary font-medium">{edu.institution}</p>
+                <p className="text-muted-foreground font-medium">{edu.institution}</p>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                   {edu.description}
                 </p>
@@ -264,7 +259,6 @@ export default function CVPage() {
         <section className="border-b border-border py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <Code2 className="h-5 w-5 text-primary" />
             Skills
@@ -313,7 +307,6 @@ export default function CVPage() {
         <section className="border-b border-border py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             <Languages className="h-5 w-5 text-primary" />
             Languages
@@ -323,7 +316,7 @@ export default function CVPage() {
             {languages.map((lang) => (
               <div 
                 key={lang.name}
-                className="rounded-xl border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-sm"
+                className="rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/50"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl">{lang.flag}</span>
@@ -355,16 +348,15 @@ export default function CVPage() {
         <section className="py-8">
           <h2 
             className="flex items-center gap-2 text-xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             References
           </h2>
           
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
             {references.map((ref, index) => (
-              <div key={index} className="rounded-xl border border-border bg-card p-4">
+              <div key={index} className="rounded-lg border border-border bg-card p-4">
                 <h3 className="font-semibold text-foreground">{ref.name}</h3>
-                <p className="text-sm text-primary">{ref.title}, {ref.company}</p>
+                <p className="text-sm text-muted-foreground">{ref.title}, {ref.company}</p>
                 <div className="mt-3 space-y-1 text-sm text-muted-foreground">
                   <p>Email: {ref.email}</p>
                   <p>Phone: {ref.phone}</p>

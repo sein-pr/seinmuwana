@@ -82,7 +82,6 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2
           className="mb-8 text-2xl font-bold text-foreground"
-          style={{ fontFamily: "var(--font-heading)" }}
         >
           Other Projects
         </h2>
@@ -95,7 +94,7 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 filter === activeFilter
                   ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-primary/10"
+                  : "bg-secondary text-secondary-foreground hover:bg-accent"
               }`}
             >
               {filter}
@@ -115,9 +114,9 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
 
             return (
               <Link key={project.title} href={`/projects/${project.slug}`} className="group">
-                <div className="h-full rounded-2xl border border-border bg-background p-6 transition-all hover:border-primary/50 hover:shadow-lg">
+                <div className="h-full rounded-lg border border-border bg-background p-6 transition-all hover:border-primary/50">
                   <div className="mb-4 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary text-foreground">
                       <Icon className="h-6 w-6" />
                     </div>
                     <Badge variant={project.status === "Completed" ? "secondary" : "default"}>
@@ -126,12 +125,11 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
                   </div>
 
                   <h3
-                    className="text-lg font-bold text-foreground transition-colors group-hover:text-primary"
-                    style={{ fontFamily: "var(--font-heading)" }}
+                    className="text-lg font-bold text-foreground transition-colors group-hover:text-foreground"
                   >
                     {project.title}
                   </h3>
-                  <p className="text-sm font-medium text-primary">{project.subtitle}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{project.subtitle}</p>
 
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     {project.description}
@@ -154,7 +152,7 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
                   </div>
 
                   <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-                    <span className="flex items-center gap-1 text-sm font-medium text-primary group-hover:underline">
+                    <span className="flex items-center gap-1 text-sm font-medium text-foreground group-hover:underline">
                       View project
                       <ArrowRight className="h-3 w-3" />
                     </span>
@@ -192,8 +190,8 @@ export function OtherProjectsSection({ projects }: { projects: OtherProject[] })
                 disabled={isTransitioning}
                 className={`h-9 w-9 rounded-full text-sm font-medium transition-all ${
                   page === currentPage
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "bg-secondary text-secondary-foreground hover:bg-primary/10"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-accent"
                 }`}
                 aria-label={`Go to page ${page}`}
               >

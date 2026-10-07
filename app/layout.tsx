@@ -1,13 +1,13 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, IBM_Plex_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
+const plex = IBM_Plex_Sans({ subsets: ["latin"], weight: "600", variable: "--font-plex" });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seinmuwana.netlify.app'),
@@ -84,7 +84,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${plex.variable} font-sans antialiased`}>
         <Header />
         <main>{children}</main>
         <Footer />

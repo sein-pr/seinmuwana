@@ -55,7 +55,7 @@ export function HeroImageSlider() {
 
   return (
     <div
-      className="relative overflow-hidden rounded-xl cursor-crosshair"
+      className="relative overflow-hidden rounded cursor-crosshair"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
@@ -73,7 +73,7 @@ export function HeroImageSlider() {
               src={image.src || "/placeholder.svg"}
               alt={image.alt}
               fill
-              className="object-cover rounded-xl"
+              className="object-cover rounded"
               priority={index === 0}
             />
           </div>
@@ -82,12 +82,12 @@ export function HeroImageSlider() {
         {/* Hover Hint Overlay - Only shows when not interacted */}
         {!hasInteracted && (
           <div
-            className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center transition-opacity duration-300 rounded-xl ${
+            className={`absolute inset-0 bg-black/40 flex flex-col items-center justify-center transition-opacity duration-300 rounded ${
               isHovering ? "opacity-0" : "opacity-100"
             }`}
           >
-            <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 mb-2">
-              <Hand className="h-6 w-6 text-white animate-pulse" />
+            <div className="mb-2">
+              <Hand className="h-6 w-6 text-white" />
             </div>
             <p className="text-white font-medium text-sm">Hover to explore</p>
             <p className="text-white/70 text-xs mt-1">Move cursor across image</p>
@@ -115,7 +115,7 @@ export function HeroImageSlider() {
 
         {/* Caption Badge */}
         <div className="absolute top-3 right-3">
-          <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-2.5 py-1 rounded-full">
+          <span className="bg-carbon/80 text-white text-xs font-medium px-3 py-1 rounded-full">
             {images[currentIndex].caption}
           </span>
         </div>
@@ -123,18 +123,18 @@ export function HeroImageSlider() {
         {/* Navigation Arrows - Show on hover */}
         <button
           onClick={goToPrev}
-          className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-1.5 rounded-full transition-opacity ${
+          className={`absolute left-2 top-1/2 -translate-y-1/2 bg-carbon/80 text-white p-1.5 rounded-full transition-opacity ${
             isHovering ? "opacity-100" : "opacity-0"
-          } hover:bg-white/30`}
+          } hover:bg-carbon`}
           aria-label="Previous image"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
         <button
           onClick={goToNext}
-          className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-1.5 rounded-full transition-opacity ${
+          className={`absolute right-2 top-1/2 -translate-y-1/2 bg-carbon/80 text-white p-1.5 rounded-full transition-opacity ${
             isHovering ? "opacity-100" : "opacity-0"
-          } hover:bg-white/30`}
+          } hover:bg-carbon`}
           aria-label="Next image"
         >
           <ChevronRight className="h-4 w-4" />

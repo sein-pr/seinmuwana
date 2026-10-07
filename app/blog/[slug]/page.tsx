@@ -275,7 +275,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       {/* Hero Image with Tags */}
       <section className="pt-6 pb-8">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="relative rounded-2xl overflow-hidden">
+          <div className="relative rounded-lg overflow-hidden">
             <div className="aspect-[21/9] relative">
               <Image
                 src={post.image || "/placeholder.svg"}
@@ -294,7 +294,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-md px-3 py-1 text-sm font-medium text-white border border-white/30"
+                    className="inline-flex items-center rounded-full bg-carbon px-3 py-1 text-sm font-medium text-white"
                   >
                     {tag}
                   </span>
@@ -311,8 +311,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <Badge variant="secondary" className="mb-4">{post.category}</Badge>
           
           <h1 
-            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="text-3xl font-bold text-foreground sm:text-4xl text-balance"
           >
             {post.title}
           </h1>
@@ -342,12 +341,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <section className="py-8 sm:py-12">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <article 
-            className="prose prose-lg max-w-none text-foreground prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-primary prose-pre:bg-secondary prose-pre:text-secondary-foreground"
+            className="prose prose-lg max-w-none text-foreground prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-a:text-foreground prose-a:underline prose-pre:bg-secondary prose-pre:text-secondary-foreground"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
           
           {/* Author Card */}
-          <div className="mt-16 rounded-2xl border border-border bg-card p-6">
+          <div className="mt-16 rounded-lg border border-border bg-card p-6">
             <div className="flex items-center gap-4">
               <div className="relative h-16 w-16 overflow-hidden rounded-full">
                 <Image
@@ -377,7 +376,6 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <h2 
             className="text-2xl font-bold text-foreground"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Enjoyed this article?
           </h2>

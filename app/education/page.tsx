@@ -67,10 +67,8 @@ export default function EducationPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Academic Background</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Education & Research
             </h1>
@@ -87,21 +85,20 @@ export default function EducationPage() {
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="space-y-12">
             {education.map((edu, index) => (
-              <div key={index} className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+              <div key={index} className="rounded-lg border border-border bg-card p-6 sm:p-8">
                 {/* Header */}
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
                       <GraduationCap className="h-6 w-6" />
                     </div>
                     <div>
                       <h2 
                         className="text-xl font-bold text-card-foreground"
-                        style={{ fontFamily: 'var(--font-heading)' }}
                       >
                         {edu.degree}
                       </h2>
-                      <p className="text-primary font-medium">{edu.institution}</p>
+                      <p className="text-muted-foreground font-medium">{edu.institution}</p>
                       <p className="text-sm text-muted-foreground">{edu.period}</p>
                     </div>
                   </div>
@@ -117,12 +114,11 @@ export default function EducationPage() {
 
                 {/* Research Section (if applicable) */}
                 {edu.research && (
-                  <div className="mt-8 rounded-xl bg-secondary/50 p-6">
+                  <div className="mt-8 rounded-lg bg-secondary/50 p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Lightbulb className="h-5 w-5 text-primary" />
                       <h3 
                         className="font-semibold text-foreground"
-                        style={{ fontFamily: 'var(--font-heading)' }}
                       >
                         Research Project
                       </h3>
@@ -137,7 +133,7 @@ export default function EducationPage() {
                       <ul className="space-y-1">
                         {edu.research.objectives.map((obj, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <span className="text-primary">•</span>
+                            <span className="text-muted-foreground">•</span>
                             {obj}
                           </li>
                         ))}
@@ -178,8 +174,7 @@ export default function EducationPage() {
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               Training & Certifications
             </h2>
@@ -190,12 +185,12 @@ export default function EducationPage() {
 
           <div className="grid gap-6 sm:grid-cols-2">
             {certifications.map((cert, index) => (
-              <div key={index} className="rounded-xl border border-border bg-background p-6">
+              <div key={index} className="rounded-lg border border-border bg-background p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <Award className="h-5 w-5 text-primary" />
                   <h3 className="font-semibold text-foreground">{cert.title}</h3>
                 </div>
-                <p className="text-sm text-primary font-medium mb-2">{cert.issuer}</p>
+                <p className="text-sm text-muted-foreground font-medium mb-2">{cert.issuer}</p>
                 <p className="text-sm text-muted-foreground">{cert.description}</p>
               </div>
             ))}
@@ -208,8 +203,7 @@ export default function EducationPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               Explore My Work
             </h2>

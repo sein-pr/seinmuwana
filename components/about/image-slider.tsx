@@ -56,7 +56,7 @@ export function ImageSlider() {
   return (
     <div className="relative">
       <div 
-        className="relative overflow-hidden rounded-2xl bg-background shadow-xl cursor-crosshair"
+        className="relative overflow-hidden rounded bg-background cursor-crosshair"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
@@ -87,8 +87,8 @@ export function ImageSlider() {
                 isHovering ? "opacity-0" : "opacity-100"
               }`}
             >
-              <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 mb-3">
-                <Hand className="h-8 w-8 text-white animate-pulse" />
+              <div className="mb-3">
+                <Hand className="h-8 w-8 text-white" />
               </div>
               <p className="text-white font-medium text-sm">Hover to explore</p>
               <p className="text-white/70 text-xs mt-1">Move cursor across image</p>
@@ -116,7 +116,7 @@ export function ImageSlider() {
 
           {/* Caption Badge */}
           <div className="absolute top-4 right-4">
-            <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full">
+            <span className="bg-carbon/80 text-white text-xs font-medium px-3 py-1 rounded-full">
               {images[currentIndex].caption}
             </span>
           </div>
@@ -124,18 +124,18 @@ export function ImageSlider() {
           {/* Navigation Arrows - Show on hover */}
           <button
             onClick={goToPrev}
-            className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full transition-opacity ${
+            className={`absolute left-2 top-1/2 -translate-y-1/2 bg-carbon/80 text-white p-2 rounded-full transition-opacity ${
               isHovering ? "opacity-100" : "opacity-0"
-            } hover:bg-white/30`}
+            } hover:bg-carbon`}
             aria-label="Previous image"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={goToNext}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full transition-opacity ${
+            className={`absolute right-2 top-1/2 -translate-y-1/2 bg-carbon/80 text-white p-2 rounded-full transition-opacity ${
               isHovering ? "opacity-100" : "opacity-0"
-            } hover:bg-white/30`}
+            } hover:bg-carbon`}
             aria-label="Next image"
           >
             <ChevronRight className="h-5 w-5" />
@@ -144,13 +144,13 @@ export function ImageSlider() {
       </div>
 
       {/* Location Badge */}
-      <div className="absolute -bottom-6 -left-6 rounded-xl bg-primary p-4 shadow-lg">
-        <div className="flex items-center gap-2 text-primary-foreground">
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="mt-4">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          <span className="font-medium">Windhoek, Namibia</span>
+          <span>Windhoek, Namibia</span>
         </div>
       </div>
     </div>

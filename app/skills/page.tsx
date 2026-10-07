@@ -109,10 +109,8 @@ export default function SkillsPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Capabilities</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Skills & Expertise
             </h1>
@@ -131,16 +129,15 @@ export default function SkillsPage() {
             {skillCategories.map((category) => (
               <div 
                 key={category.title}
-                className="rounded-2xl border border-border bg-card p-6"
+                className="rounded-lg border border-border bg-card p-6"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary text-foreground">
                     <category.icon className="h-6 w-6" />
                   </div>
                   <div>
                     <h2 
                       className="text-lg font-bold text-card-foreground"
-                      style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       {category.title}
                     </h2>
@@ -201,8 +198,7 @@ export default function SkillsPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               See My Skills in Action
             </h2>

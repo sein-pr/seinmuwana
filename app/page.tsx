@@ -9,10 +9,10 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <SkillsPreview />
       <ExperiencePreview />
-      <CertificationsPreview />
+      <SkillsPreview />
       <ProjectsPreview />
+      <CertificationsPreview />
       <CTASection />
     </>
   )

@@ -81,10 +81,8 @@ export default function BlogPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Blog</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Technical Blog
             </h1>
@@ -106,7 +104,7 @@ export default function BlogPage() {
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                   category === "All"
                     ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-primary/10"
+                    : "bg-secondary text-secondary-foreground hover:bg-accent"
                 }`}
               >
                 {category}
@@ -126,7 +124,7 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
-                <article className="flex flex-col rounded-2xl border border-border bg-card overflow-hidden transition-all hover:border-primary/50 hover:shadow-lg h-full">
+                <article className="flex flex-col rounded-lg border border-border bg-card overflow-hidden transition-all hover:border-primary/50 h-full">
                   {/* Blog Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -136,7 +134,7 @@ export default function BlogPage() {
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-primary/90 text-primary-foreground backdrop-blur-sm">
+                      <Badge className="bg-carbon text-white">
                         {post.category}
                       </Badge>
                     </div>
@@ -144,8 +142,7 @@ export default function BlogPage() {
                   
                   <div className="flex flex-1 flex-col p-6">
                     <h2 
-                      className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors line-clamp-2"
-                      style={{ fontFamily: 'var(--font-heading)' }}
+                      className="text-lg font-bold text-card-foreground group-hover:text-foreground transition-colors line-clamp-2"
                     >
                       {post.title}
                     </h2>
@@ -170,7 +167,7 @@ export default function BlogPage() {
                         </span>
                       </div>
                       
-                      <span className="flex items-center gap-1 text-xs font-medium text-primary group-hover:underline">
+                      <span className="flex items-center gap-1 text-xs font-medium text-foreground group-hover:underline">
                         Read more
                         <ArrowRight className="h-3 w-3" />
                       </span>
@@ -188,8 +185,7 @@ export default function BlogPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               Stay Updated
             </h2>
@@ -200,7 +196,7 @@ export default function BlogPage() {
             <div className="mt-8">
               <Link 
                 href="/contact"
-                className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+                className="inline-flex items-center gap-2 text-muted-foreground font-medium hover:underline"
               >
                 Get in touch to discuss collaboration
                 <ArrowRight className="h-4 w-4" />

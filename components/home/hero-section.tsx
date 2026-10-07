@@ -1,19 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, ChevronDown, Download, Github, Linkedin, Mail, MapPin, Mouse } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
 import { HeroImageSlider } from "./hero-image-slider"
-import { AnimatedSection } from "@/components/ui/animated-section"
 
-const roles = [
-  "Software Engineer",
-  "Process Automation Specialist",
-  "Quality Assurance Engineer",
-  "AI Specialist"
-]
+const tags = ["Full-Stack", "AI & Machine Learning", "Process Automation", "Quality Assurance"]
 
 type GitHubStats = {
   commits: number | null
@@ -22,204 +15,97 @@ type GitHubStats = {
 }
 
 export function HeroSection() {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
   const [stats, setStats] = useState<GitHubStats | null>(null)
-  const [statsLoading, setStatsLoading] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true)
-      setTimeout(() => {
-        setCurrentRoleIndex((prev) => (prev + 1) % roles.length)
-        setIsAnimating(false)
-      }, 500)
-    }, 3000)
-
-    return () => clearInterval(interval)
+    fetch("/api/github-stats")
+      .then((res) => (res.ok ? (res.json() as Promise<GitHubStats>) : null))
+      .then((data) => data && setStats(data))
+      .catch(() => {
+        // Non-blocking: the hero reads fine without live stats.
+      })
   }, [])
 
-  useEffect(() => {
-    const loadStats = async () => {
-      try {
-        const response = await fetch("/api/github-stats")
-        if (!response.ok) {
-          setStatsLoading(false)
-          return
-        }
-        const data = (await response.json()) as GitHubStats
-        setStats(data)
-      } catch {
-        // Non-blocking: keep hero content visible even if stats fetch fails.
-      } finally {
-        setStatsLoading(false)
-      }
-    }
-
-    loadStats()
-  }, [])
+  const facts = [
+    stats?.commits != null ? `${stats.commits.toLocaleString()} commits` : null,
+    stats?.projects != null ? `${stats.projects} public projects` : null,
+  ].filter(Boolean)
 
   return (
-    <section className="relative overflow-hidden bg-background py-14 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
-          {/* Left Content */}
-          <div className="flex-1 space-y-8 lg:-translate-y-6">
-            <AnimatedSection animation="fade-up" delay={0}>
-              <Badge variant="secondary" className="w-fit gap-2 px-4 py-2 text-sm font-medium">
-                <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                Available for Work
-              </Badge>
-            </AnimatedSection>
+    <section className="bg-midnight text-white">
+      <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-24">
+        <div>
+          <h1 className="text-[2.75rem] leading-[1.05] text-white sm:text-6xl lg:text-[4.5rem]">
+            Software that removes the busywork.
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-[1.55] text-white/80">
+            I&apos;m Sein Muwana, a software engineer in Windhoek. I build full-stack systems, AI tools and RPA bots in
+            C#, Java and Python, and I&apos;ve shipped them inside a bank.
+          </p>
 
-            <AnimatedSection animation="fade-up" delay={100}>
-              <div className="space-y-4">
-                <h1
-                  className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Hi, I&apos;m a{" "}
-                  <span 
-                    className={`text-primary inline-block transition-all duration-500 ${
-                      isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
-                    }`}
-                  >
-                    {roles[currentRoleIndex]}
-                  </span>
-                </h1>
-                <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-                  Dedicated software engineer with expertise in C#, Java, Python, full-stack web development,
-                  and AI. Passionate about leveraging technology to drive innovation and digital transformation.
-                </p>
-              </div>
-            </AnimatedSection>
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <li
+                key={tag}
+                className="rounded-full bg-periwinkle-tint px-3.5 py-1.5 text-sm font-medium text-carbon"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
 
-            <AnimatedSection animation="fade-up" delay={200}>
-              <div className="space-y-5">
-                <div className="flex flex-col gap-4 sm:flex-row">
-                  <Button asChild size="lg" className="gap-2">
-                    <Link href="/contact">
-                      Contact Me
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="gap-2 bg-transparent">
-                    <Link href="/cv">
-                      <Download className="h-4 w-4" />
-                      Download CV
-                    </Link>
-                  </Button>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3">
-                  <Button asChild variant="outline" size="icon" className="bg-transparent">
-                    <a
-                      href={stats?.githubUrl ?? "https://github.com/sein-pr"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                    >
-                      <Github className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="icon" className="bg-transparent">
-                    <a
-                      href="https://www.linkedin.com/in/sein-muwana-2ab319299/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="icon" className="bg-transparent">
-                    <a href="mailto:seinprince2@gmail.com" aria-label="Email">
-                      <Mail className="h-4 w-4" />
-                    </a>
-                  </Button>
-
-                  <div className="ml-1 flex flex-wrap items-center gap-2">
-                    <Badge variant="secondary" className="px-3 py-1 text-xs sm:text-sm">
-                      {stats && stats.commits !== null
-                        ? `${stats.commits.toLocaleString()} commits`
-                        : statsLoading
-                          ? "Loading commits..."
-                          : "Commits unavailable"}
-                    </Badge>
-                    <Badge variant="secondary" className="px-3 py-1 text-xs sm:text-sm">
-                      {stats && stats.projects !== null
-                        ? `${stats.projects} projects`
-                        : statsLoading
-                          ? "Loading projects..."
-                          : "Projects unavailable"}
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <Button asChild size="lg">
+              <Link href="/contact">
+                Contact me
+                <ArrowRight />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white bg-transparent text-white hover:bg-white/10"
+            >
+              <Link href="/projects">See my work</Link>
+            </Button>
           </div>
 
-          {/* Right Content - Profile Card */}
-          <AnimatedSection animation="fade-left" delay={300} className="flex flex-1 justify-center lg:justify-end">
-            <div className="relative w-full max-w-md">
-              {/* Main Profile Card */}
-              <div className="relative z-10 overflow-hidden rounded-2xl bg-card shadow-xl">
-                <div className="p-8">
-                  <div className="flex items-start gap-4">
-                    <div className="space-y-1">
-                      <h2
-                        className="text-2xl font-bold text-card-foreground"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Sein Muwana
-                      </h2>
-                      <div className="flex items-center gap-1 text-base text-muted-foreground">
-                        <MapPin className="h-5 w-5" />
-                        Windhoek, Namibia
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Profile Image with Slider */}
-                  <div className="mt-6">
-                    <HeroImageSlider />
-                  </div>
-
-                  {/* Tags */}
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="text-sm px-3 py-1">AI Expert</Badge>
-                    <Badge variant="secondary" className="text-sm px-3 py-1">Full-Stack</Badge>
-                    <Badge variant="secondary" className="text-sm px-3 py-1">Automation</Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Badge - Top Right Corner */}
-              <div className="absolute -top-3 -right-4 z-20 rounded-xl bg-primary px-5 py-4 shadow-lg">
-                <p className="text-base font-medium text-primary-foreground">CS Honours Graduate</p>
-                <p className="text-sm text-primary-foreground/80">University of Namibia</p>
-              </div>
-
-              {/* Decorative Element */}
-              <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full bg-accent/20 blur-2xl" />
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/70">
+            <div className="flex items-center gap-4">
+              <a
+                href={stats?.githubUrl ?? "https://github.com/sein-pr"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="transition-colors hover:text-white"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sein-muwana-2ab319299/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-white"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="mailto:seinprince2@gmail.com" aria-label="Email" className="transition-colors hover:text-white">
+                <Mail className="h-5 w-5" />
+              </a>
             </div>
-          </AnimatedSection>
+            {facts.length > 0 && <p className="tabular">{facts.join(" · ")}</p>}
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-[380px] lg:ml-auto">
+          <HeroImageSlider />
+          <p className="mt-4 text-sm text-white/70">
+            Sein Muwana · BSc Computer Science (Honours), University of Namibia
+          </p>
         </div>
       </div>
-
-      <AnimatedSection
-        animation="fade-up"
-        delay={500}
-        className="pointer-events-none absolute inset-x-0 bottom-5 hidden justify-center sm:flex"
-      >
-        <div className="flex flex-col items-center gap-1.5 text-muted-foreground">
-          <div className="relative">
-            <Mouse className="h-5 w-5" />
-            <span className="absolute -bottom-1.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary animate-bounce" />
-          </div>
-          <ChevronDown className="h-3.5 w-3.5 animate-bounce [animation-delay:120ms]" />
-        </div>
-      </AnimatedSection>
     </section>
   )
 }

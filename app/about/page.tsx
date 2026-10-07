@@ -45,10 +45,8 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1">
-              <Badge variant="secondary" className="mb-4">About Me</Badge>
               <h1 
-                className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="text-4xl font-bold text-foreground sm:text-5xl"
               >
                 Software Engineer & AI Enthusiast
               </h1>
@@ -88,8 +86,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               What Drives Me
             </h2>
@@ -101,12 +98,11 @@ export default function AboutPage() {
           <div className="mx-auto mt-12 grid max-w-4xl gap-8 sm:grid-cols-3">
             {values.map((value) => (
               <div key={value.title} className="text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-foreground">
                   <value.icon className="h-7 w-7" />
                 </div>
                 <h3 
                   className="mt-4 font-semibold text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {value.title}
                 </h3>
@@ -125,8 +121,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1">
               <h2 
-                className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-                style={{ fontFamily: 'var(--font-heading)' }}
+                className="text-3xl font-bold text-foreground sm:text-4xl"
               >
                 Areas of Interest
               </h2>
@@ -149,10 +144,9 @@ export default function AboutPage() {
             </div>
             
             <div className="flex-1">
-              <div className="rounded-2xl border border-border bg-background p-6">
+              <div className="rounded-lg border border-border bg-background p-6">
                 <h3 
                   className="font-semibold text-lg text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   Research Focus
                 </h3>
@@ -179,8 +173,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               Let&apos;s Connect
             </h2>

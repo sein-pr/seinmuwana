@@ -39,10 +39,10 @@ export default async function CertificationDetailPage({ params }: { params: Para
             </Link>
           </Button>
 
-          <div className="rounded-2xl border border-border bg-background p-6 sm:p-8">
+          <div className="rounded-lg border border-border bg-background p-6 sm:p-8">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-start gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-secondary text-foreground">
                   <Award className="h-7 w-7" />
                 </div>
                 <div>
@@ -50,12 +50,11 @@ export default async function CertificationDetailPage({ params }: { params: Para
                     {certification.level}
                   </Badge>
                   <h1
-                    className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-                    style={{ fontFamily: "var(--font-heading)" }}
+                    className="text-3xl font-bold text-foreground sm:text-4xl"
                   >
                     {certification.title}
                   </h1>
-                  <p className="mt-2 text-primary font-medium">{certification.issuer}</p>
+                  <p className="mt-2 text-muted-foreground font-medium">{certification.issuer}</p>
                   <p className="text-sm text-muted-foreground">
                     Issued {new Date(certification.issueDate).toLocaleDateString("en-US", {
                       month: "long",
@@ -87,7 +86,7 @@ export default async function CertificationDetailPage({ params }: { params: Para
                   {certification.fullDescription}
                 </p>
               </div>
-              <div className="rounded-xl border border-border bg-card p-5">
+              <div className="rounded-lg border border-border bg-card p-5">
                 <h2 className="text-lg font-semibold text-foreground">Credential Information</h2>
                 <dl className="mt-4 space-y-3 text-sm">
                   <div className="flex items-center justify-between gap-4">
@@ -122,10 +121,9 @@ export default async function CertificationDetailPage({ params }: { params: Para
 
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 text-center">
+          <div className="rounded-lg border border-border bg-card p-6 sm:p-8 text-center">
             <h2
               className="text-2xl font-bold text-foreground"
-              style={{ fontFamily: "var(--font-heading)" }}
             >
               Explore More Credentials
             </h2>

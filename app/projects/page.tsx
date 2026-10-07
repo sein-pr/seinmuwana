@@ -187,10 +187,8 @@ export default function ProjectsPage() {
       <section className="bg-card py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="secondary" className="mb-4">Portfolio</Badge>
             <h1 
-              className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-4xl font-bold text-foreground sm:text-5xl"
             >
               Projects & Portfolio
             </h1>
@@ -207,7 +205,6 @@ export default function ProjectsPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 
             className="text-2xl font-bold text-foreground mb-8"
-            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Featured Project
           </h2>
@@ -215,12 +212,12 @@ export default function ProjectsPage() {
           {projects.filter(p => p.featured).map((project) => (
             <div 
               key={project.title}
-              className="rounded-2xl border-2 border-primary/20 bg-card p-6 sm:p-10"
+              className="rounded-lg border-2 border-primary/20 bg-card p-6 sm:p-10"
             >
               <div className="flex flex-col gap-8 lg:flex-row">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-secondary text-foreground">
                       <project.icon className="h-7 w-7" />
                     </div>
                     <div>
@@ -230,11 +227,10 @@ export default function ProjectsPage() {
                   
                   <h3 
                     className="text-2xl font-bold text-card-foreground"
-                    style={{ fontFamily: 'var(--font-heading)' }}
                   >
                     {project.title}
                   </h3>
-                  <p className="text-primary font-medium">{project.subtitle}</p>
+                  <p className="text-muted-foreground font-medium">{project.subtitle}</p>
                   
                   <p className="mt-4 text-muted-foreground leading-relaxed">
                     {project.longDescription}
@@ -266,7 +262,7 @@ export default function ProjectsPage() {
                 </div>
                 
                 <div className="flex-1">
-                  <div className="rounded-xl bg-secondary/50 p-6">
+                  <div className="rounded-lg bg-secondary/50 p-6">
                     <h4 className="font-semibold text-foreground mb-4">Key Objectives</h4>
                     <ul className="space-y-3">
                       {project.objectives.map((obj, i) => (
@@ -316,8 +312,7 @@ export default function ProjectsPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
+              className="text-3xl font-bold text-foreground sm:text-4xl"
             >
               Interested in Working Together?
             </h2>

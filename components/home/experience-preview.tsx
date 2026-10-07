@@ -2,80 +2,57 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Building2, GraduationCap } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
 const experiences = [
   {
-    icon: Building2,
     title: "Software Developer Intern",
     company: "Agricultural Bank of Namibia",
-    period: "Feb 2025 - July 2025",
+    period: "Feb 2025 – Jul 2025",
     description:
-      "Developed user access applications, built automation bots using Power Automate and UIPath, and served as project manager for website revamp.",
-    type: "Work",
+      "Developed user access applications, built automation bots using Power Automate and UiPath, and served as project manager for the website revamp.",
   },
   {
-    icon: GraduationCap,
     title: "Student Assistant",
     company: "University of Namibia",
-    period: "Jan 2025 - Feb 2025",
+    period: "Jan 2025 – Feb 2025",
     description:
-      "Managed student registration, collaborated with ICT team, and led process improvements for the registration system.",
-    type: "Academic",
+      "Managed student registration, collaborated with the ICT team, and led process improvements for the registration system.",
   },
 ]
 
 export function ExperiencePreview() {
   return (
-    <section className="bg-background py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="bg-background py-20">
+      <div className="mx-auto max-w-[1200px] px-6">
         <AnimatedSection animation="fade-up">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2
-                className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
-                Recent Experience
-              </h2>
-              <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-                Proven track record of delivering impactful solutions in real-world environments.
+              <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Recent experience</h2>
+              <p className="mt-3 max-w-xl text-lg leading-[1.55] text-[#383838]">
+                Work inside a bank and a university, on systems people use every day.
               </p>
             </div>
-            <Button asChild variant="outline" className="w-fit gap-2 bg-transparent">
+            <Button asChild variant="outline" className="w-fit">
               <Link href="/experience">
-                View All
-                <ArrowRight className="h-4 w-4" />
+                All experience
+                <ArrowRight />
               </Link>
             </Button>
           </div>
         </AnimatedSection>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-12 border-t border-border">
           {experiences.map((exp, index) => (
-            <AnimatedSection key={exp.title} animation="fade-up" delay={index * 150}>
-              <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg">
-                <div className="flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <exp.icon className="h-6 w-6" />
-                  </div>
-                  <Badge variant="secondary">{exp.type}</Badge>
+            <AnimatedSection key={exp.title} animation="fade-up" delay={index * 100}>
+              <div className="grid gap-3 border-b border-border py-8 md:grid-cols-[200px_1fr_1.4fr] md:gap-10">
+                <p className="tabular text-sm text-muted-foreground md:pt-1">{exp.period}</p>
+                <div>
+                  <h3 className="text-xl text-foreground">{exp.title}</h3>
+                  <p className="mt-1 text-base text-muted-foreground">{exp.company}</p>
                 </div>
-
-                <div className="mt-4 space-y-2">
-                  <h3
-                    className="font-semibold text-lg text-card-foreground"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {exp.title}
-                  </h3>
-                  <p className="text-sm font-medium text-primary">{exp.company}</p>
-                  <p className="text-sm text-muted-foreground">{exp.period}</p>
-                </div>
-
-                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{exp.description}</p>
+                <p className="text-base leading-[1.55] text-[#383838]">{exp.description}</p>
               </div>
             </AnimatedSection>
           ))}

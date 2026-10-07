@@ -33,19 +33,19 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <footer className="border-t border-border bg-background">
+      <div className="mx-auto max-w-[1200px] px-6 py-12">
         <div className="flex flex-col items-center gap-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image 
               src="/SD Logo.png" 
-              alt="SD Logo" 
+              alt="" 
               width={40} 
               height={40}
-              className="h-10 w-10 object-contain"
+              className="h-8 w-auto object-contain brightness-0"
             />
-            <span className="font-bold text-lg text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+            <span className="font-bold text-lg text-foreground">
               Sein Muwana
             </span>
           </Link>
@@ -56,7 +56,7 @@ export function Footer() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.name}
               </Link>
@@ -71,7 +71,7 @@ export function Footer() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-5 w-5" aria-hidden="true" />

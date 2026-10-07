@@ -2,41 +2,32 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { AnimatedSection } from "@/components/ui/animated-section"
 
 export function CTASection() {
   return (
-    <section className="bg-primary py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <AnimatedSection animation="zoom-in" className="mx-auto max-w-2xl text-center">
-          <h2
-            className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Let&apos;s Work Together
-          </h2>
-          <p className="mt-4 text-lg text-primary-foreground/80">
-            I&apos;m currently available for freelance projects, full-time opportunities, and collaborations.
-            Let&apos;s create something impactful together.
+    <section className="bg-midnight py-24 text-white">
+      <div className="mx-auto max-w-[1200px] px-6">
+        <AnimatedSection animation="fade-up" className="max-w-2xl">
+          <h2 className="text-4xl text-white sm:text-[3.5rem] sm:leading-[1.08]">Have something to build?</h2>
+          <p className="mt-4 text-lg leading-[1.55] text-white/80">
+            I&apos;m open to freelance projects, full-time roles and collaborations. Tell me what you&apos;re working on.
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" variant="secondary" className="gap-2">
-              <Link href="/contact">
-                <Mail className="h-4 w-4" />
-                Get in Touch
-              </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link href="/contact">Get in touch</Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="gap-2 border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className="border-white bg-transparent text-white hover:bg-white/10"
             >
               <Link href="/projects">
-                View My Work
-                <ArrowRight className="h-4 w-4" />
+                View my work
+                <ArrowRight />
               </Link>
             </Button>
           </div>
