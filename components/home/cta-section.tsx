@@ -1,46 +1,42 @@
 "use client"
 
 import Link from "next/link"
+import { motion, useReducedMotion } from "motion/react"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Mail } from "lucide-react"
-import { AnimatedSection } from "@/components/ui/animated-section"
+import { SplitHeading } from "@/components/motion/split-heading"
 
 export function CTASection() {
+  const reduce = useReducedMotion()
   return (
-    <section className="bg-primary py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <AnimatedSection animation="zoom-in" className="mx-auto max-w-2xl text-center">
-          <h2
-            className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Let&apos;s Work Together
-          </h2>
-          <p className="mt-4 text-lg text-primary-foreground/80">
-            I&apos;m currently available for freelance projects, full-time opportunities, and collaborations.
-            Let&apos;s create something impactful together.
+    <section className="bg-midnight py-24 text-white sm:py-32">
+      <div className="mx-auto max-w-[1200px] px-6">
+        <SplitHeading
+          text="Have a process that eats time?"
+          inView
+          className="max-w-3xl text-4xl text-white sm:text-[4.5rem] sm:leading-[1.05]"
+        />
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ delay: 0.35, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="mt-5 max-w-xl text-lg leading-[1.55] text-white/80">
+            Tell me what the work looks like today. I&apos;m open to full-time roles, freelance projects and collaborations.
           </p>
-
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" variant="secondary" className="gap-2">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button asChild size="lg">
               <Link href="/contact">
-                <Mail className="h-4 w-4" />
-                Get in Touch
+                Get in touch
+                <ArrowRight />
               </Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="gap-2 border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-            >
-              <Link href="/projects">
-                View My Work
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+            <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white/10">
+              <Link href="/projects">View my work</Link>
             </Button>
           </div>
-        </AnimatedSection>
+        </motion.div>
       </div>
     </section>
   )

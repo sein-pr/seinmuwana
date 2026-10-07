@@ -4,7 +4,9 @@ export type Certification = {
   issuer: string
   issueDate: string
   category: string
-  credentialId: string
+  credentialId?: string
+  /** Issuer-hosted page where the credential can be checked. */
+  verifyUrl?: string
   shortDescription: string
   fullDescription: string
   skills: string[]
@@ -13,12 +15,26 @@ export type Certification = {
 
 export const certifications: Certification[] = [
   {
+    slug: "elements-of-data-science-epfl",
+    title: "Elements of Data Science",
+    issuer: "EPFL Extension School",
+    issueDate: "2026-04-10",
+    category: "Data Science",
+    credentialId: "Gn6bVlmlZhSE",
+    verifyUrl: "https://learn.extensionschool.ch/verify/Gn6bVlmlZhSE",
+    shortDescription:
+      "Verified certificate of attendance for EPFL's online data science course, taught by Prof. Anne-Marie Kermarrec.",
+    fullDescription:
+      "A Verified Certificate of Attendance from the EPFL Extension School for the Elements of Data Science course. The issuer hosts a verification page for this certificate.",
+    skills: ["Data Science", "Python", "Data Analysis"],
+    level: "Intermediate",
+  },
+  {
     slug: "basics-of-data-science",
     title: "Basics of Data Science",
     issuer: "Professional Training Program",
     issueDate: "2024-01-15",
     category: "Data Science",
-    credentialId: "BDS-2024-SM",
     shortDescription:
       "Foundational training in data science concepts, data handling, and practical analytical workflows.",
     fullDescription:
@@ -30,9 +46,10 @@ export const certifications: Certification[] = [
     slug: "neo4j-fundamentals",
     title: "Neo4j Fundamentals",
     issuer: "Neo4j",
-    issueDate: "2024-03-20",
+    issueDate: "2024-04-24",
     category: "Graph Databases",
-    credentialId: "N4J-FUND-SM",
+    credentialId: "e8cb0abc-3b09-4ca2-9d65-41a2928c6e46",
+    verifyUrl: "https://graphacademy.neo4j.com/c/e8cb0abc-3b09-4ca2-9d65-41a2928c6e46/",
     shortDescription:
       "Core Neo4j knowledge covering graph modeling, Cypher basics, and graph-first thinking.",
     fullDescription:
@@ -44,9 +61,10 @@ export const certifications: Certification[] = [
     slug: "graph-data-science-neo4j",
     title: "Certificate in Graph Data Science",
     issuer: "Neo4j",
-    issueDate: "2024-05-08",
+    issueDate: "2024-04-27",
     category: "Graph Data Science",
-    credentialId: "N4J-GDS-SM",
+    credentialId: "2ba6ecc3-96ff-458d-b9d4-d9862331cd86",
+    verifyUrl: "https://graphacademy.neo4j.com/c/2ba6ecc3-96ff-458d-b9d4-d9862331cd86/",
     shortDescription:
       "Applied graph data science including graph algorithms and insight generation from connected data.",
     fullDescription:
@@ -60,7 +78,6 @@ export const certifications: Certification[] = [
     issuer: "Cisco",
     issueDate: "2024-06-11",
     category: "Programming",
-    credentialId: "CISCO-PY-SM",
     shortDescription:
       "Python programming certification focused on practical scripting and software development fundamentals.",
     fullDescription:
@@ -74,7 +91,6 @@ export const certifications: Certification[] = [
     issuer: "AgriSense Initiative",
     issueDate: "2025-01-25",
     category: "Sustainability",
-    credentialId: "AGRISENSE-ENV-SM",
     shortDescription:
       "Recognition for sustainability-focused innovation through the AgriSense initiative.",
     fullDescription:
@@ -88,7 +104,6 @@ export const certifications: Certification[] = [
     issuer: "Professional Development Program",
     issueDate: "2025-03-09",
     category: "AI Strategy",
-    credentialId: "CT-AI-SM",
     shortDescription:
       "Certification focused on reasoning, decision quality, and critical evaluation in AI-driven environments.",
     fullDescription:
@@ -102,7 +117,6 @@ export const certifications: Certification[] = [
     issuer: "HackerAtom Hackathon",
     issueDate: "2025-07-18",
     category: "Hackathon",
-    credentialId: "HACKERATOM-U-SM",
     shortDescription:
       "Participation recognition in a uranium-focused hackathon exploring applied innovation.",
     fullDescription:

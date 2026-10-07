@@ -1,7 +1,6 @@
 import { HeroSection } from "@/components/home/hero-section"
-import { SkillsPreview } from "@/components/home/skills-preview"
-import { ExperiencePreview } from "@/components/home/experience-preview"
-import { CertificationsPreview } from "@/components/home/certifications-preview"
+import { ProblemSection } from "@/components/home/problem-section"
+import { HowSection } from "@/components/home/how-section"
 import { ProjectsPreview } from "@/components/home/projects-preview"
 import { CTASection } from "@/components/home/cta-section"
 
@@ -9,9 +8,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <SkillsPreview />
-      <ExperiencePreview />
-      <CertificationsPreview />
+      <ProblemSection />
+      <HowSection />
       <ProjectsPreview />
       <CTASection />
     </>

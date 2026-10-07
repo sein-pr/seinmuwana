@@ -1,215 +1,132 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Mail, Linkedin, GraduationCap, Target, Heart } from "lucide-react"
-import { ImageSlider } from "@/components/about/image-slider"
+import { ProfileSlider } from "@/components/profile-slider"
+import { PageHeader } from "@/components/layout/page-header"
+import { Section, SectionHeading } from "@/components/layout/section"
+import { ClosingBand } from "@/components/layout/closing-band"
 
 export const metadata: Metadata = {
   title: "About | Sein Muwana",
-  description: "Learn more about Sein Muwana - Software Engineer, AI enthusiast, and AgriTech researcher based in Namibia.",
+  description:
+    "Sein Muwana is a data analyst and software engineer at Agribank Namibia who builds reporting, ETL pipelines, RPA automations and computer-vision tools.",
 }
 
-const interests = [
-  "Artificial Intelligence & Machine Learning",
-  "Agricultural Technology (AgriTech)",
-  "Process Automation & RPA",
-  "Digital Transformation",
-  "Full-Stack Development",
-  "Quality Assurance",
+const practice = [
+  {
+    title: "Requirements first",
+    body: "I wrote the Software Requirements Specification for Agribank's website revamp with more than 12 people from ICT, Marketing and Operations, before any build started.",
+  },
+  {
+    title: "Prove the numbers",
+    body: "I reconcile reports line by line against the source, and wrote Python scripts to prove the SAP-to-Swordfish robots move data accurately.",
+  },
+  {
+    title: "Remove the manual step",
+    body: "A data-access application improved efficiency by 80%, the RPA robots cut manual effort by 75%, and a dashboard replaced a week of report preparation.",
+  },
 ]
 
-const values = [
-  {
-    icon: Target,
-    title: "Innovation",
-    description: "Constantly seeking new ways to leverage technology for impactful solutions.",
-  },
-  {
-    icon: Heart,
-    title: "Excellence",
-    description: "Committed to delivering high-quality work and continuous improvement.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Learning",
-    description: "Passionate about expanding knowledge and staying current with technology.",
-  },
+const interests = [
+  "Machine learning and computer vision",
+  "Process automation and RPA",
+  "Data analytics and reporting",
+  "Full-stack web development",
+  "IoT and smart systems",
 ]
 
 export default function AboutPage() {
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="bg-card py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
-            <div className="flex-1">
-              <Badge variant="secondary" className="mb-4">About Me</Badge>
-              <h1 
-                className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
-                Software Engineer & AI Enthusiast
-              </h1>
-              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                I&apos;m Sein Muwana, a dedicated software engineer based in Windhoek, Namibia. 
-                With expertise in C#, Java, Python, and full-stack development, I&apos;m passionate 
-                about leveraging technology to improve processes and deliver impactful solutions.
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Currently completing my Bachelor of Computer Science Honours at the University of Namibia, 
-                my research focuses on AgriSense - a crop and disease monitoring system designed to make 
-                agricultural technology accessible and affordable.
-              </p>
-              
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Button asChild className="gap-2">
-                  <Link href="/contact">
-                    Get in Touch
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="gap-2 bg-transparent">
-                  <Link href="/cv">View Full CV</Link>
-                </Button>
-              </div>
-            </div>
-            
-            <div className="flex-1">
-              <ImageSlider />
-            </div>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHeader
+        title="Data analyst and software engineer in Windhoek."
+        description="I turn messy data and manual process into reports and systems that people can rely on."
+      >
+        <Button asChild size="lg">
+          <Link href="/contact">
+            Get in touch
+            <ArrowRight />
+          </Link>
+        </Button>
+        <Button asChild size="lg" variant="outline" className="border-white bg-transparent text-white hover:bg-white/10">
+          <Link href="/cv">View CV</Link>
+        </Button>
+      </PageHeader>
 
-      {/* Values Section */}
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              What Drives Me
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              My core values shape how I approach every project and collaboration.
+      <Section>
+        <div className="grid items-start gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+          <div className="space-y-5 text-lg leading-[1.6] text-graphite">
+            <p>
+              I&apos;m a data analyst and software engineer at the Agricultural Bank of Namibia. Day to day I extract data from
+              SAP, SharePoint and legacy systems, load it into SQL, check its quality and turn it into Power BI reports that
+              Finance and executives present from.
+            </p>
+            <p>
+              I joined Agribank as a software development intern in February 2025. The internship was extended twice on
+              performance, and I moved into the graduate data analyst role in January 2026. Along the way I migrated millions
+              of legacy transactions into SQL, built Power Automate robots and wrote the requirements for the bank&apos;s
+              website revamp.
+            </p>
+            <p>
+              I hold a BSc (Honours) in Computer Science from the University of Namibia. My thesis, AgriSense, applies computer
+              vision to tomato disease detection for smallholder farmers.
             </p>
           </div>
-
-          <div className="mx-auto mt-12 grid max-w-4xl gap-8 sm:grid-cols-3">
-            {values.map((value) => (
-              <div key={value.title} className="text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <value.icon className="h-7 w-7" />
-                </div>
-                <h3 
-                  className="mt-4 font-semibold text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  {value.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {value.description}
-                </p>
-              </div>
-            ))}
+          <div className="mx-auto w-full max-w-[420px]">
+            <ProfileSlider />
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Interests Section */}
-      <section className="bg-card py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
-            <div className="flex-1">
-              <h2 
-                className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
-                Areas of Interest
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                My professional interests span across multiple domains, 
-                allowing me to bring diverse perspectives to problem-solving.
-              </p>
-              
-              <div className="mt-8 flex flex-wrap gap-3">
-                {interests.map((interest) => (
-                  <Badge 
-                    key={interest} 
-                    variant="secondary" 
-                    className="px-4 py-2 text-sm"
-                  >
-                    {interest}
-                  </Badge>
-                ))}
-              </div>
+      <Section tone="fog">
+        <SectionHeading title="How I work" description="Habits I picked up delivering for a bank and a university." />
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
+          {practice.map((item) => (
+            <div key={item.title}>
+              <h3 className="text-xl text-foreground">{item.title}</h3>
+              <p className="mt-3 text-base leading-[1.55] text-graphite">{item.body}</p>
             </div>
-            
-            <div className="flex-1">
-              <div className="rounded-2xl border border-border bg-background p-6">
-                <h3 
-                  className="font-semibold text-lg text-foreground"
-                  style={{ fontFamily: 'var(--font-heading)' }}
-                >
-                  Research Focus
-                </h3>
-                <p className="mt-2 text-muted-foreground leading-relaxed">
-                  My honours research project, AgriSense, focuses on improving the agricultural 
-                  sector by introducing affordable and accessible technology for crop and disease 
-                  monitoring. This project combines my passion for AI and my desire to create 
-                  meaningful impact in Namibia and beyond.
-                </p>
-                <Button asChild variant="link" className="mt-4 h-auto p-0">
-                  <Link href="/projects">
-                    Learn more about AgriSense
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Contact CTA */}
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 
-              className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              Let&apos;s Connect
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              I&apos;m always open to discussing new opportunities, collaborations, 
-              or simply connecting with fellow tech enthusiasts.
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <h2 className="text-4xl text-foreground sm:text-[2.5rem]">Where I&apos;m heading</h2>
+            <ul className="mt-6 divide-y divide-border border-y border-border">
+              {interests.map((interest) => (
+                <li key={interest} className="py-3.5 text-lg text-foreground">
+                  {interest}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-lg bg-lavender-mist p-8">
+            <h3 className="text-2xl text-foreground">Research: AgriSense</h3>
+            <p className="mt-3 text-base leading-[1.6] text-graphite">
+              A real-time crop monitoring and disease detection system for smallholder farmers in Namibia. An enhanced
+              YOLOv8 model with CBAM attention and a BiRepGFPN feature pyramid reached 93.8% mAP50-95 and 92.2% accuracy
+              across 9 tomato leaf classes.
             </p>
-            
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button asChild size="lg" className="gap-2">
-                <a href="mailto:seinprince2@gmail.com">
-                  <Mail className="h-4 w-4" />
-                  Email Me
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="gap-2 bg-transparent">
-                <a 
-                  href="https://www.linkedin.com/in/sein-muwana-2ab319299/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  Connect on LinkedIn
-                </a>
-              </Button>
-            </div>
+            <Link
+              href="/projects/agrisense"
+              className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-base font-medium text-foreground underline underline-offset-4"
+            >
+              Read about the project
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
-      </section>
-    </div>
+      </Section>
+
+      <ClosingBand
+        title="Want to work together?"
+        description="I'm open to full-time roles, freelance projects and collaborations."
+        primary={{ label: "Send a message", href: "/contact" }}
+        secondary={{ label: "See projects", href: "/projects" }}
+      />
+    </>
   )
 }
