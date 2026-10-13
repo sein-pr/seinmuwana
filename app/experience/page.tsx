@@ -7,6 +7,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 import { cv } from "@/lib/cv"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/experience" },
   title: "Experience | Sein Muwana",
   description:
     "Data analyst graduate and former software development intern at Agribank Namibia, plus student registration work at the University of Namibia.",

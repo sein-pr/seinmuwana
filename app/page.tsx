@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { HeroSection } from "@/components/home/hero-section"
 import { ProblemSection } from "@/components/home/problem-section"
 import { HowSection } from "@/components/home/how-section"
@@ -7,6 +8,10 @@ import { CTASection } from "@/components/home/cta-section"
 import { VelocityMarquee } from "@/components/motion/velocity-marquee"
 
 const strip = ["Data", "ETL", "SQL", "Power BI", "RPA", "Python", "Computer vision", "Microsoft Fabric"]
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+}
 
 export default function HomePage() {
   return (

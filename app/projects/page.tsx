@@ -10,6 +10,7 @@ import { Tilt } from "@/components/motion/tilt"
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects" },
   title: "Projects | Sein Muwana",
   description:
     "AgriSense crop disease detection, data and automation work at Agribank, and websites for small businesses.",

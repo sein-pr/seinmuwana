@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/seo/json-ld"
+import { absoluteUrl } from "@/lib/seo"
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
@@ -19,8 +21,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!post) return { title: "Post not found | Sein Muwana" }
   return {
     title: `${post.title} | Sein Muwana`,
+    alternates: { canonical: `/blog/${post.slug}` },
     description: post.excerpt,
-    openGraph: { title: post.title, description: post.excerpt, type: "article", images: [post.image] },
+    openGraph: { title: post.title, description: post.excerpt, type: "article", publishedTime: post.date, url: `/blog/${post.slug}`, images: [post.image] },
   }
 }
 
@@ -34,6 +37,18 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          image: absoluteUrl(post.image),
+          mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+          author: { "@type": "Person", name: "Sein Muwana", url: absoluteUrl("/") },
+        }}
+      />
       <header className="bg-midnight text-white">
         <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
           <Link

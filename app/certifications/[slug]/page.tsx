@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   return {
     title: `${certification.title} | Certifications | Sein Muwana`,
+    alternates: { canonical: `/certifications/${certification.slug}` },
     description: certification.shortDescription,
   }
 }

@@ -9,6 +9,7 @@ import { DrawLine } from "@/components/motion/draw-line"
 import { certifications } from "@/lib/certifications"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/certifications" },
   title: "Certifications | Sein Muwana",
   description:
     "Certifications in data science, graph data, Python and AI-era critical thinking, plus hackathon participation.",

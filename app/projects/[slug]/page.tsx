@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!project) return { title: "Project not found | Sein Muwana" }
   return {
     title: `${project.title} | Projects | Sein Muwana`,
+    alternates: { canonical: `/projects/${project.slug}` },
     description: project.summary,
   }
 }

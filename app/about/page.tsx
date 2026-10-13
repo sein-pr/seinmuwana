@@ -11,6 +11,7 @@ import { Section, SectionHeading } from "@/components/layout/section"
 import { ClosingBand } from "@/components/layout/closing-band"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About | Sein Muwana",
   description:
     "Sein Muwana is a data analyst and software engineer at Agribank Namibia who builds reporting, ETL pipelines, RPA automations and computer-vision tools.",
