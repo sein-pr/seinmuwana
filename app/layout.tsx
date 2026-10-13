@@ -1,7 +1,8 @@
 import React from "react"
+import { JsonLd } from '@/components/seo/json-ld'
+import { absoluteUrl } from '@/lib/seo'
 import type { Metadata, Viewport } from 'next'
 import { Inter, IBM_Plex_Sans } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -61,10 +62,7 @@ export const metadata: Metadata = {
     description:
       'Portfolio of Sein Muwana: data, reporting, RPA automation and computer-vision projects from Windhoek, Namibia.',
   },
-  icons: {
-    icon: '/SD Logo.png',
-    apple: '/SD Logo.png',
-  },
+  icons: { apple: '/SD Logo.png' },
 }
 
 export const viewport: Viewport = {
@@ -91,13 +89,40 @@ export default function RootLayout({
         <Cursor />
         <ScrollProgress />
         <Header />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'WebSite',
+                '@id': absoluteUrl('/#website'),
+                url: absoluteUrl('/'),
+                name: 'Sein Muwana',
+                inLanguage: 'en',
+                publisher: { '@id': absoluteUrl('/#person') },
+              },
+              {
+                '@type': 'Person',
+                '@id': absoluteUrl('/#person'),
+                name: 'Sein Muwana',
+                url: absoluteUrl('/'),
+                image: absoluteUrl('/opengraph-image'),
+                jobTitle: 'Data Analyst and Software Engineer',
+                worksFor: { '@type': 'Organization', name: 'Agricultural Bank of Namibia' },
+                alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Namibia' },
+                address: { '@type': 'PostalAddress', addressLocality: 'Windhoek', addressCountry: 'NA' },
+                knowsAbout: ['SQL', 'Power BI', 'Python', 'RPA', 'ETL', 'Computer vision'],
+                sameAs: ['https://www.linkedin.com/in/sein-muwana-2ab319299/', 'https://github.com/sein-pr'],
+              },
+            ],
+          }}
+        />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>
         <Footer />
         <BackToTop />
         </MotionProvider>
-        <Analytics />
       </body>
     </html>
   )

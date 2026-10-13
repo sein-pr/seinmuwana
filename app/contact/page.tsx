@@ -8,6 +8,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 import { VelocityMarquee } from "@/components/motion/velocity-marquee"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact | Sein Muwana",
   description: "Email Sein Muwana about software, automation or AI work. Based in Windhoek, Namibia.",
 }

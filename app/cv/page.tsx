@@ -7,6 +7,7 @@ import { PrintButton } from "@/components/cv/print-button"
 import { cv } from "@/lib/cv"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cv" },
   title: "CV | Sein Muwana",
   description:
     "Curriculum vitae of Sein Muwana: software development intern at Agribank, BSc Computer Science Honours graduate.",

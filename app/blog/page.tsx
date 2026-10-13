@@ -9,6 +9,7 @@ import { CategoryNav } from "@/components/blog/category-nav"
 import { Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog | Sein Muwana",
   description: "Notes on RPA, AgriSense, Python and working inside a bank, written by Sein Muwana.",
 }

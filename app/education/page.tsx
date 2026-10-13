@@ -9,6 +9,7 @@ import { MetricBar } from "@/components/motion/metric-bar"
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/education" },
   title: "Education | Sein Muwana",
   description:
     "BSc Computer Science Honours (graduated 2026) from the University of Namibia, with an honours thesis on crop disease detection.",

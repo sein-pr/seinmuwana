@@ -8,6 +8,7 @@ import { DrawLine } from "@/components/motion/draw-line"
 import { cv } from "@/lib/cv"
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/skills" },
   title: "Skills | Sein Muwana",
   description: "SQL, Power BI, Python, automation and machine-learning tools Sein Muwana uses.",
 }

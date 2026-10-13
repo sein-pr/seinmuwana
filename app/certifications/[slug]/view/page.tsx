@@ -14,7 +14,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const certification = getCertificationBySlug(slug)
   return {
     title: certification ? `${certification.title} credential summary | Sein Muwana` : "Credential | Sein Muwana",
-    robots: { index: false },
+    alternates: { canonical: `/certifications/${slug}` },
+    robots: { index: false, follow: true },
   }
 }
 
