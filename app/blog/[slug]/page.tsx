@@ -1,3 +1,4 @@
+import sanitizeHtml from "sanitize-html"
 import { JsonLd } from "@/components/seo/json-ld"
 import { absoluteUrl } from "@/lib/seo"
 import type { Metadata } from "next"
@@ -71,7 +72,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <div className="relative aspect-[16/9] overflow-hidden rounded bg-fog">
             <Image src={post.image} alt={post.imageAlt} fill priority sizes="768px" className="object-cover grayscale" />
           </div>
-          <article className="article mt-12" dangerouslySetInnerHTML={{ __html: post.content }} />
+          <article className="article mt-12" dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content, { allowedTags: sanitizeHtml.defaults.allowedTags.concat(["h1", "h2", "h3", "img", "figure", "figcaption"]), allowedAttributes: { a: ["href", "title"], img: ["src", "alt", "width", "height"] }, allowedSchemes: ["http", "https", "mailto"] }) }} />
 
           <aside className="mt-16 flex items-center gap-4 border-t border-border pt-8">
             <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full">

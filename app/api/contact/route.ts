@@ -3,13 +3,16 @@ import { z } from "zod"
 
 export const dynamic = "force-dynamic"
 
+const noControls = (s: string) => !/[\r\n]/.test(s)
+
 const schema = z.object({
   name: z.string().trim().min(1, "Enter your name.").max(100),
   email: z.string().trim().email("Enter a valid email address.").max(200),
-  subject: z.string().trim().min(1, "Add a subject.").max(150),
+  subject: z.string().trim().min(1, "Add a subject.").max(150).refine(noControls, "No line breaks in the subject."),
   message: z.string().trim().min(10, "Write at least a sentence.").max(5000),
   // Honeypot: real visitors never fill this in.
   website: z.string().max(200).optional(),
+  turnstileToken: z.string().max(4096).optional(),
 })
 
 const TEST_FROM = "Portfolio contact <onboarding@resend.dev>"
@@ -18,9 +21,52 @@ const FREE_MAIL = new Set(["gmail.com", "googlemail.com", "outlook.com", "hotmai
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_PER_WINDOW = 5
 const hits = new Map<string, number[]>()
+const SITE_ORIGINS = new Set(["https://seinmuwana.netlify.app"])
+const MAX_BODY_BYTES = 16 * 1024
+
+/** Strip CR/LF and other control characters so a field can never inject mail headers. */
+const clean = (s: string) => s.replace(/[\u0000-\u001f\u007f]+/g, " ").trim()
+
+function clientIp(request: Request) {
+  // Netlify sets this itself, so a visitor cannot spoof it the way they can x-forwarded-for.
+  return (
+    request.headers.get("x-nf-client-connection-ip") ??
+    request.headers.get("x-forwarded-for")?.split(",").pop()?.trim() ??
+    "unknown"
+  )
+}
+
+function originAllowed(request: Request) {
+  const origin = request.headers.get("origin")
+  if (!origin) return false
+  if (SITE_ORIGINS.has(origin)) return true
+  try {
+    const { hostname } = new URL(origin)
+    // Netlify deploy previews and local development.
+    return (hostname.endsWith(".netlify.app") && hostname.includes("--seinmuwana")) || hostname === "localhost"
+  } catch {
+    return false
+  }
+}
+
+async function turnstileOk(token: string | undefined, ip: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY
+  if (!secret) return true // Not configured: the other defences still apply.
+  if (!token) return false
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+    })
+    return ((await res.json()) as { success?: boolean }).success === true
+  } catch {
+    return false
+  }
+}
 
 function rateLimited(ip: string) {
   const now = Date.now()
+  if (hits.size > 5000) hits.clear()
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS)
   recent.push(now)
   hits.set(ip, recent)
@@ -40,7 +86,17 @@ export async function POST(request: Request) {
     )
   }
 
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown"
+  if (!originAllowed(request)) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 403 })
+  }
+  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+    return NextResponse.json({ error: "Invalid request." }, { status: 415 })
+  }
+  if (Number(request.headers.get("content-length") ?? 0) > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Message is too large." }, { status: 413 })
+  }
+
+  const ip = clientIp(request)
   if (rateLimited(ip)) {
     return NextResponse.json({ error: "Too many messages. Please try again in a few minutes." }, { status: 429 })
   }
@@ -58,9 +114,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please check the highlighted fields.", fields }, { status: 400 })
   }
 
-  const { name, email, subject, message, website } = parsed.data
+  const { website, turnstileToken } = parsed.data
+  const name = clean(parsed.data.name)
+  const email = clean(parsed.data.email)
+  const subject = clean(parsed.data.subject)
+  const message = parsed.data.message
   // Honeypot tripped: pretend success so bots learn nothing.
   if (website) return NextResponse.json({ ok: true })
+  if (!(await turnstileOk(turnstileToken, ip))) {
+    return NextResponse.json({ error: "Verification failed. Refresh the page and try again." }, { status: 400 })
+  }
 
   const to = process.env.CONTACT_TO_EMAIL || "seinprince2@gmail.com"
   const configuredFrom = process.env.CONTACT_FROM_EMAIL || TEST_FROM
