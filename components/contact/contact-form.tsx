@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Loader2 } from "lucide-react"
 import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
@@ -9,6 +9,14 @@ import { Textarea } from "@/components/ui/textarea"
 
 type Status = "idle" | "sending" | "sent" | "error"
 type FieldErrors = Partial<Record<"name" | "email" | "subject" | "message", string[]>>
+
+const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+
+declare global {
+  interface Window {
+    turnstile?: { render: (el: HTMLElement, opts: Record<string, unknown>) => string; reset: (id?: string) => void }
+  }
+}
 
 const empty = { name: "", email: "", subject: "", message: "", website: "" }
 
@@ -19,6 +27,28 @@ export function ContactForm() {
   const [code, setCode] = useState("")
   const [reason, setReason] = useState("")
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+
+  const [token, setToken] = useState("")
+  const widgetRef = useRef<HTMLDivElement>(null)
+  const widgetId = useRef<string | undefined>(undefined)
+
+  useEffect(() => {
+    if (!siteKey || status === "sent") return
+    const mount = () => {
+      if (!widgetRef.current || !window.turnstile || widgetId.current) return
+      widgetId.current = window.turnstile.render(widgetRef.current, {
+        sitekey: siteKey,
+        callback: (t: string) => setToken(t),
+        "expired-callback": () => setToken(""),
+      })
+    }
+    if (window.turnstile) return mount()
+    const script = document.createElement("script")
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+    script.async = true
+    script.onload = mount
+    document.head.appendChild(script)
+  }, [status])
 
   const update = (key: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [key]: e.target.value }))
@@ -35,7 +65,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, turnstileToken: token }),
       })
       const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string; reason?: string; fields?: FieldErrors }
 
@@ -44,10 +74,14 @@ export function ContactForm() {
         setError(data.error ?? "Your message couldn't be sent. Please try again.")
         setCode(data.code ?? "")
         setReason(data.reason ?? "")
+        setToken("")
+        window.turnstile?.reset(widgetId.current)
         setStatus("error")
         return
       }
       setValues(empty)
+      widgetId.current = undefined
+      setToken("")
       setStatus("sent")
     } catch {
       setError("You appear to be offline. Check your connection and try again.")
@@ -107,7 +141,8 @@ export function ContactForm() {
         )}
       </div>
 
-      <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
+      {siteKey && <div ref={widgetRef} />}
+      <Button type="submit" size="lg" disabled={sending || (!!siteKey && !token)} className="w-full sm:w-auto">
         {sending ? (
           <>
             <Loader2 className="animate-spin motion-reduce:animate-none" aria-hidden="true" />
